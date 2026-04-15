@@ -1,148 +1,420 @@
 import { motion } from "framer-motion";
-import { Sparkles, ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import {
+  Sparkles,
+  BrainCircuit,
+  PenLine,
+  PencilRuler,
+  CodeXml,
+  ShieldCheck,
+  Download,
+  Eye,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import SkillsMarquee from "@/components/SkillsMarquee";
+import CertificatesSection from "@/components/CertificatesSection";
+import BorderGlow from "@/components/BorderGlow";
 import Footer from "@/components/Footer";
+import SkillsHeading from "@/components/SkillsHeading";
+import GitHubHeatmap from "@/components/GitHubHeatmap";
+import GlareHover from "@/components/GlareHover";
+import LetsTalkInnerLoader from "@/components/LetsTalkInnerLoader";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const resumePdf = "/resume/Arun-webdev1.pdf";
+const profilePic = "/profilepic.png";
+const letsTalkCircleText = "LET'S TALK • LET'S TALK • LET'S TALK • LET'S TALK • ";
 
 const experiences = [
   {
     id: 1,
-    role: "Software Engineer",
-    company: "OneShield Software",
-    period: "Aug 2022 — Present",
-    logo: "🛡️",
+    role: "2nd Place — National Hackathon",
+    company: "HIRE-4-THON 2026 • Team Project",
+    period: "Mar 2026",
+    logo: "🥈",
+    bullets: [
+      "Built an AI-powered web application within 24 hours",
+      "Developed responsive UI using React.js & Tailwind CSS",
+      "Integrated REST APIs and enabled real-time interactions",
+      "Collaborated on architecture, UI/UX, and feature planning",
+      "Delivered a scalable solution recognized at national level",
+    ],
+    stack: ["React", "Tailwind", "JavaScript", "APIs", "Git"],
   },
-  {
-    id: 2,
-    role: "Founder",
-    company: "Design and Code",
-    period: "Jan 2021 — Present",
-    logo: "💻",
-  },
-  {
-    id: 3,
-    role: "Design Engineer",
-    company: "BlackboxAI",
-    period: "Feb 2025 — Mar 2025",
-    logo: "🤖",
-  },
-  {
-    id: 4,
-    role: "UI/UX Designer",
-    company: "Social3",
-    period: "Aug 2022 — Sep 2023",
-    logo: "🎨",
-  },
+  // {
+  //   id: 2,
+  //   role: "Your Previous Role",
+  //   company: "Previous Company",
+  //   period: "Month Year — Month Year",
+  //   logo: "�",
+  // },
+
+  // Add more experiences as needed
 ];
 
 const designProcess = [
-  { step: "01", title: "Strategize", description: "To create something awesome, one must first talk about the details. Planning is essential." },
-  { step: "02", title: "Wireframe", description: "After hashing out the details of the website, it's easy to throw the ideas onto pen & paper." },
-  { step: "03", title: "Design", description: "The most fun part of all - adding pizzaz to the wireframes and bring it to life." },
-  { step: "04", title: "Development", description: "The design may be final but it needs to be functional and practical. Development is key." },
-  { step: "05", title: "Quality Assurance", description: "Website load times, SEO, file optimization, etc., weigh in to the quality of the site." },
+  {
+    step: "01",
+    title: "Strategize",
+    description:
+      "To create something awesome, one must first talk about the details. Planning is essential.",
+    Icon: BrainCircuit,
+    fontFamily: "'Buda', serif",
+    fontSize: "16px",
+    fontWeight: 600,
+  },
+  {
+    step: "02",
+    title: "Wireframe",
+    description:
+      "After hashing out the details of the website, it's easy to throw the ideas onto pen & paper.",
+    Icon: PenLine,
+    fontFamily: "'Buda', serif",
+    fontSize: "16px",
+    fontWeight: 600,
+  },
+  {
+    step: "03",
+    title: "Design",
+    description:
+      "The most fun part of all - adding pizzaz to the wireframes and bring it to life.",
+    Icon: PencilRuler,
+    fontFamily: "'Buda', serif",
+    fontSize: "16px",
+    fontWeight: 600,
+  },
+  {
+    step: "04",
+    title: "Development",
+    description:
+      "The design may be final but it needs to be functional and practical. Development is key.",
+    Icon: CodeXml,
+    fontFamily: "'Buda', serif",
+    fontSize: "16px",
+    fontWeight: 600,
+  },
+  {
+    step: "05",
+    title: "Quality Assurance",
+    description:
+      "Website load times, SEO, file optimization, etc., weigh in to the quality of the site.",
+    Icon: ShieldCheck,
+    fontFamily: "'Buda', serif",
+    fontSize: "16px",
+    fontWeight: 600,
+  },
 ];
 
-const awards = [
-  { title: "Star Performer of the Year", date: "May 2021" },
-  { title: "Best Beginner Hack", date: "Apr 2021" },
-  { title: "Sketch Webpage Contest Winner", date: "Nov 2020" },
-  { title: "Best Space App Winner", date: "Sep 2021" },
-];
+const AccordionItem = ({
+  exp,
+  index,
+  defaultOpen = false,
+}: {
+  exp: (typeof experiences)[0];
+  index: number;
+  defaultOpen?: boolean;
+}) => {
+  const [open, setOpen] = useState(defaultOpen);
 
-const communityFeatures = [
-  { icon: "🎯", title: "Mentoring", description: "Get connected with a mentor that will help you pave your career path." },
-  { icon: "💼", title: "Opportunities", description: "Get Internships and Job opportunities and gain experience while you learn." },
-  { icon: "📚", title: "Free Resources", description: "Get Free resources related to Designing and Development from the community." },
-  { icon: "⭐", title: "Help & Reviews", description: "Get your portfolio and projects reviewed by Industry experts and mentors." },
-];
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.08 }}
+      className="block"
+    >
+      <div className="bg-white/38 backdrop-blur-[6px] transition-all duration-300 dark:bg-black/32">
+        <button
+          onClick={() => setOpen((prev) => !prev)}
+          className="w-full flex items-center justify-between gap-3 px-4 py-4 text-left sm:px-5"
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-white/55 text-xl shadow-[0_6px_16px_-12px_rgba(0,0,0,0.35)] dark:bg-black/45">
+              {exp.logo}
+            </span>
+            <div className="min-w-0">
+              <p
+                className="truncate text-[clamp(1rem,0.35vw+0.9rem,1.12rem)] font-medium leading-[1.15] text-zinc-900 dark:text-zinc-100"
+                style={{ fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", letterSpacing: "0.01em" }}
+              >
+                {exp.role}
+              </p>
+              <p
+                className="text-[13px] text-zinc-600 dark:text-zinc-400"
+                style={{ fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif", fontWeight: 500, letterSpacing: "0.01em" }}
+              >
+                {exp.company}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <span
+              className="inline-flex items-center px-3.5 py-1 text-sm font-semibold leading-none text-zinc-700 dark:text-zinc-200"
+              style={{ fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif", letterSpacing: "0.01em" }}
+            >
+              {exp.period}
+            </span>
+            <motion.svg
+              animate={{ rotate: open ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+              className="h-4 w-4 text-zinc-400 dark:text-zinc-500"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </motion.svg>
+          </div>
+        </button>
+
+        <motion.div
+          initial={false}
+          animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+          transition={{ duration: 0.35, ease: "easeInOut" }}
+          style={{ overflow: "hidden" }}
+        >
+          <div className="px-4 pb-4 sm:px-5">
+            {exp.bullets && (
+              <ul className="mb-3 space-y-2 pl-2">
+                {exp.bullets.map((item, idx) => (
+                  <li
+                    key={idx}
+                    className="flex items-start gap-2 text-[13px] text-zinc-600 dark:text-zinc-400"
+                    style={{ fontFamily: "'Santoshi', 'Satoshi', '__Satoshi_4a0ccf', -apple-system, sans-serif", letterSpacing: "0.01em" }}
+                  >
+                    <div className="mt-[0.45rem] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-zinc-400 dark:bg-zinc-500" />
+                    <p
+                      className="ashu"
+                      style={exp.role.includes("Hackathon")
+                        ? {
+                          fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                          wordSpacing: "0.10em",
+                          letterSpacing: "0.01em",
+                          fontSize: "0.9rem",
+                          fontWeight: 500,
+                          lineHeight: "1.6",
+                        }
+                        : undefined
+                      }
+                    >
+                      {item}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {exp.stack && (
+              <div className="flex flex-wrap gap-2">
+                {exp.stack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-md bg-zinc-50 px-2.5 py-1 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+                    style={{ fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif", fontWeight: 500 }}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
 
 const About = () => {
+  const [resumeOpen, setResumeOpen] = useState(false);
+
+  const handlePreviewResume = () => {
+    window.open(resumePdf, "_blank");
+    setResumeOpen(false);
+  };
+
+  const handleDownloadResume = () => {
+    const link = document.createElement("a");
+    link.href = resumePdf;
+    link.download = "Arun-Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setResumeOpen(false);
+  };
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          {/* Profile Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="relative"
-          >
-            <div className="relative w-80 h-96 mx-auto md:mx-0">
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop"
-                alt="Devraj Chatribin"
-                className="w-full h-full object-cover rounded-2xl"
-              />
-              {/* Rotating "Let's Talk" badge */}
+      <section className="min-h-[90vh] px-14 sm:px-24 md:px-36 lg:px-48 py-16 md:py-24 md:pt-12">
+        <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', columnGap: '2rem', alignItems: 'start', paddingTop: '43px' }} className="md:!grid-cols-[384px_1fr]">
+            {/* Profile Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="relative mx-auto md:mx-0 md:w-auto"
+              style={{ width: 'clamp(200px, 80vw, 384px)', height: 'clamp(270px, 100vw, 512px)' }}
+            >
+              <GlareHover
+                width="100%"
+                height="100%"
+                background="transparent"
+                borderRadius="0 0 260px 260px"
+                borderColor="hsl(var(--border))"
+                glareColor="#ffffff"
+                glareOpacity={0.22}
+                glareAngle={-35}
+                glareSize={220}
+                transitionDuration={700}
+                className="h-full w-full"
+              >
+                <motion.img
+                  src={profilePic}
+                  alt="arun chavan"
+                  width={384}
+                  height={512}
+                  className="aspect-3/4 h-full w-full object-cover transition duration-300 hover:scale-[1.015]"
+                  whileHover={{ scale: 1.015 }}
+                />
+              </GlareHover>
+
+              {/* Rotating "Let's Talk" CTA Button */}
               <Link
                 to="/contact"
-                className="absolute -right-8 bottom-20 w-24 h-24 bg-secondary rounded-full flex items-center justify-center group hover:bg-primary transition-colors"
+                className="group bg-background border-2 border-current text-foreground absolute right-0 bottom-0 grid aspect-square h-fit w-[40%] place-content-center rounded-full p-3 shadow hover:bg-foreground hover:text-background group-hover:border-background transition-all duration-200 focus:outline-none"
               >
-                <div className="relative w-full h-full">
-                  <svg className="w-full h-full animate-spin-slow" viewBox="0 0 100 100">
-                    <path
-                      id="circlePath"
-                      fill="none"
-                      d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
-                    />
-                    <text className="text-[10px] fill-current uppercase tracking-widest">
-                      <textPath href="#circlePath">
-                        Let's Talk • Let's Talk • Let's Talk •
-                      </textPath>
-                    </text>
-                  </svg>
-                  <ArrowUpRight className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6" />
+                <div
+                  className="border-current group-hover:border-background absolute rounded-full border flex items-center justify-center"
+                  style={{
+                    width: "54px",
+                    height: "54px",
+                    borderRadius: "50%",
+                    overflow: "hidden",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  <LetsTalkInnerLoader className="h-full w-full" />
                 </div>
-              </Link>
-            </div>
-          </motion.div>
 
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              A <span className="text-primary">creative developer</span>
-              <br />& digital designer
-            </h1>
-            <p className="text-muted-foreground mb-8 max-w-lg">
-              I collaborate with brands globally to design impactful, mission-focused
-              websites that drive results and achieve business goals.
-            </p>
-            <Link
-              to="#"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-full hover:bg-secondary transition-colors"
+                <motion.div
+                  className="relative leading-none uppercase"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+                  style={{
+                    transform: 'rotate(1.368deg)',
+                    fontFamily: "__Satoshi_4a0ccf, 'Plus Jakarta Sans', -apple-system, sans-serif",
+                    fontWeight: 600,
+                    fontSize: '11px',
+                    letterSpacing: '0.08em',
+                  }}
+                >
+                  {letsTalkCircleText.split("").map((char, index) => (
+                    <span
+                      key={index}
+                      aria-hidden="true"
+                      className="absolute left-1/2 top-1/2 inline-block group-hover:text-background"
+                      style={{
+                        '--index': index,
+                        '--total': letsTalkCircleText.length,
+                        '--radius': 52,
+                        transform: `translate(-50%, -50%)
+                        rotate(calc(360deg / var(--total) * var(--index)))
+                        translateY(calc(var(--radius, 52) * -1px))`,
+                        transformOrigin: 'center center',
+                        opacity: 1,
+                        color: 'currentColor',
+                      } as React.CSSProperties}
+                    >
+                      {char}
+                    </span>
+                  ))}
+                  <span className="sr-only">LET'S TALK • LET'S TALK • LET'S TALK • LET'S TALK • </span>
+                </motion.div>
+              </Link>
+            </motion.div>
+
+            {/* Content */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="w-full space-y-6 mt-6 md:mt-0"
+              style={{ paddingLeft: '9px', }}
             >
-              My Resume
-            </Link>
-          </motion.div>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-balance" style={{ fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", fontSize: 'clamp(1.5rem, 8vw, 3.75rem)', lineHeight: '1.1', wordSpacing: '0.05em', letterSpacing: '0.01em', fontWeight: 500, }}>
+                A <span className="text-primary" style={{ fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", fontSize: 'clamp(1.5rem, 8vw, 3.75rem)', lineHeight: '1.1', wordSpacing: '0.02em', letterSpacing: '0.01em', fontWeight: 500, }}>creative developer</span>
+                <br />& digital designer
+              </h1>
+              <p className="text-muted-foreground text-balance max-w-2xl"
+                style={{ fontFamily: '-apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '14px', fontWeight: 500 }}>
+                {/* Focused on creating thoughtful web experiences through design and code */}
+                Passionate about building engaging digital experiences through the perfect blend of design and code.
+              </p>
+              <div >
+                <DropdownMenu open={resumeOpen} onOpenChange={setResumeOpen}>
+                  <DropdownMenuTrigger className="inline-flex items-center gap-2 px-6 py-3 border border-foreground rounded-full text-foreground hover:bg-foreground hover:text-background transition-all duration-300">
+                    My Resume
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start">
+                    <DropdownMenuItem onClick={handlePreviewResume} className="flex items-center gap-2">
+                      <Eye className="w-4 h-4" />
+                      Preview
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleDownloadResume} className="flex items-center gap-2">
+                      <Download className="w-4 h-4" />
+                      Download
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+
+              <div className="w-full" style={{ marginTop: '1.25rem' }}>
+                <GitHubHeatmap />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
+      {/* Skills Section */}
+      <SkillsHeading count={16} />
 
-      {/* Skills Marquee */}
       <SkillsMarquee />
-
-      {/* Experience Section */}
-      <section className="py-24 px-6">
+      {/* Experience Section - Accordion */}
+      <section className="py-16 sm:py-20 md:py-24 px-14 sm:px-24 md:px-36 lg:px-48">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             <div>
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-2 mb-4"
+                className="flex items-center gap-2 mb-4 text-muted-foreground"
               >
-                <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-sm uppercase tracking-widest text-muted-foreground">
+                <motion.span
+                  animate={{ opacity: [1, 0.35, 1] }}
+                  transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+                  className="inline-flex"
+                >
+                  <Sparkles className="w-4 h-4 text-primary" />
+                </motion.span>
+                <span
+                  className="text-sm uppercase tracking-widest text-primary"
+                >
                   Work History
                 </span>
               </motion.div>
@@ -151,7 +423,7 @@ const About = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-3xl md:text-5xl font-bold mb-4"
+                className="experience-heading mb-4"
               >
                 Experience
               </motion.h2>
@@ -161,39 +433,28 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-muted-foreground"
-              >
-                I have worked with some of the most innovative industry leaders to help build their top-notch products.
+                className="ashu"
+                style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '1rem', fontWeight: 500, lineHeight: '1.6' }}>
+
+                {/* I have worked with some of the most innovative industry leaders to help build their top-notch products. */}
+                A brief overview of my professional journey and the roles I've embraced along the way.
               </motion.p>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 border-t border-border pt-3">
               {experiences.map((exp, index) => (
-                <motion.div
-                  key={exp.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center justify-between p-4 bg-secondary rounded-xl"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-2xl">{exp.logo}</span>
-                    <div>
-                      <h3 className="font-semibold">{exp.role}</h3>
-                      <p className="text-sm text-muted-foreground">@{exp.company}</p>
-                    </div>
-                  </div>
-                  <span className="text-sm text-muted-foreground">{exp.period}</span>
-                </motion.div>
+                <AccordionItem key={exp.id} exp={exp} index={index} />
               ))}
             </div>
           </div>
         </div>
       </section>
 
+      {/* Certificates Section */}
+      <CertificatesSection />
+
       {/* Design Process Section */}
-      <section className="py-24 px-6 bg-card">
+      <section className="py-16 sm:py-20 md:py-24 px-14 sm:px-24 md:px-36 lg:px-48 bg-background">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -201,8 +462,14 @@ const About = () => {
             viewport={{ once: true }}
             className="flex items-center gap-2 mb-4"
           >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm uppercase tracking-widest text-muted-foreground">
+            <motion.span
+              animate={{ opacity: [1, 0.35, 1] }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+              className="inline-flex"
+            >
+              <Sparkles className="w-4 h-4 text-primary" />
+            </motion.span>
+            <span className="text-sm uppercase tracking-widest text-primary">
               Steps I follow
             </span>
           </motion.div>
@@ -211,12 +478,12 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold mb-12"
+            className="mb-12 my-design-process"
           >
-            My<span className="text-primary">Design Process</span>
+            My Design Process
           </motion.h2>
 
-          <div className="grid md:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
             {designProcess.map((item, index) => (
               <motion.div
                 key={item.step}
@@ -224,130 +491,43 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-6 bg-secondary rounded-xl"
+                className="w-full"
               >
-                <span className="text-sm text-primary font-medium">{item.step}.</span>
-                <h3 className="text-lg font-semibold mt-2 mb-3">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+                <BorderGlow className="h-full w-full" borderRadius={24} backgroundColor="hsl(var(--secondary))">
+                  <div className="p-4 md:p-6">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 + 0.05 }}
+                      className="mb-4 w-fit rounded-full border border-border/60 bg-background/60 p-4 text-primary"
+                    >
+                      <item.Icon className="h-5 w-5" />
+                    </motion.div>
 
-      {/* Awards Section */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-2 mb-4"
-          >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm uppercase tracking-widest text-muted-foreground">
-              Awards
-            </span>
-          </motion.div>
+                    <motion.h5
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 + 0.1 }}
+                      className="mb-2 font-semibold"
+                      style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '0.9rem', fontWeight: 500, lineHeight: '1.6' }}
+                    >
+                      {item.step}. {item.title}
+                    </motion.h5>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold mb-12"
-          >
-            Awards &<span className="text-primary">Recognition</span>
-          </motion.h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {awards.map((award, index) => (
-              <motion.div
-                key={award.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 bg-secondary rounded-xl"
-              >
-                <p className="text-sm text-muted-foreground mb-2">{award.date}</p>
-                <h3 className="font-semibold">{award.title}</h3>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Community Section */}
-      <section className="py-24 px-6 bg-card">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
-            <div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="flex items-center gap-2 mb-4"
-              >
-                <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-sm uppercase tracking-widest text-muted-foreground">
-                  Community Work
-                </span>
-              </motion.div>
-
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-3xl md:text-5xl font-bold mb-6"
-              >
-                Building a<span className="text-primary">Tech Community</span>
-              </motion.h2>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="text-muted-foreground"
-              >
-                I founded Design & Code which is a global community with a mission to connect designers and developers to create a happy community eager to learn, innovate and grow together.
-              </motion.p>
-            </div>
-
-            <div className="grid grid-cols-3 gap-6">
-              {[
-                { value: "3k+", label: "Community Members" },
-                { value: "16+", label: "Events conducted" },
-                { value: "3", label: "Years" },
-              ].map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="text-center"
-                >
-                  <span className="text-4xl md:text-5xl font-bold text-primary">{stat.value}</span>
-                  <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {communityFeatures.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 bg-secondary rounded-xl"
-              >
-                <span className="text-2xl mb-4 block">{feature.icon}</span>
-                <h3 className="font-semibold mb-2">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground">{feature.description}</p>
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 + 0.15 }}
+                      className="ashu"
+                      style={{ fontFamily: "'Santoshi', 'Satoshi', '__Satoshi_4a0ccf', -apple-system, sans-serif", fontSize: item.fontSize, fontWeight: 500 }}
+                    >
+                      {item.description}
+                    </motion.p>
+                  </div>
+                </BorderGlow>
               </motion.div>
             ))}
           </div>

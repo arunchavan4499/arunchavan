@@ -1,81 +1,158 @@
-import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Linkedin, Github, Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
+import HeroDividerTruckLoader from "@/components/HeroDividerTruckLoader";
 
 const HeroSection = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <section className="min-h-screen pt-32 pb-20 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative min-h-screen bg-background pt-24 sm:pt-32 md:pt-40 lg:pt-60 px-14 sm:px-24 md:px-36 lg:px-48 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
+      <div className="absolute inset-0" aria-hidden="true">
+        {/* Ballpit was removed on request. Re-add it in this background container if asked later. */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-background/20" />
+          <div className="absolute inset-y-0 left-0 w-24 sm:w-32 md:w-40 bg-gradient-to-r from-background/70 to-transparent" />
+          <div className="absolute inset-y-0 right-0 w-24 sm:w-32 md:w-40 bg-gradient-to-l from-background/70 to-transparent" />
+        </div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Intro */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex items-center gap-2 mb-8"
+          transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.2 }}
+          className="flex items-center gap-2 sm:gap-3 mb-8 sm:mb-10"
         >
-          <span className="text-2xl">👋</span>
-          <span className="text-muted-foreground">Hey! It's me Devraj,</span>
+          <motion.svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-hand text-[#E8705A] dark:text-[#B5FF6D] sm:w-6 sm:h-6"
+            aria-hidden="true"
+            animate={shouldReduceMotion ? {} : { rotate: [0, -15, 15, -15, 15, 0] }}
+            transition={{ duration: 3, repeat: Infinity }}
+            style={{ originX: 0.5, originY: 0.5 }}
+          >
+            <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"></path>
+            <path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"></path>
+            <path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"></path>
+            <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path>
+          </motion.svg>
+          <p
+            className="font-medium text-muted-foreground dark:text-gray-400 text-sm sm:text-base md:text-lg"
+            style={{ fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", wordSpacing: '0.06em' }}
+          >
+            Hey! It's me Arun,
+          </p>
         </motion.div>
 
+        {/* Big Headline */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={shouldReduceMotion ? {} : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8"
+          transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.3 }}
+          className="font-semibold tracking-tight mb-10 text-foreground dark:text-white"
+          style={{
+            fontSize: 'clamp(1.75rem, 5vw + 0.5rem, 3rem)',
+            lineHeight: '1.2',
+            letterSpacing: '0.02em',
+            wordSpacing: '0.06em',
+            fontWeight: '510'
+          }}
         >
-          Crafting{" "}
-          <span className="text-primary">purpose driven experiences</span>{" "}
-          that inspire & engage.
+          Great experiences {" "}
+          <span
+            className="text-[#E8705A] dark:text-[#B5FF6D]"
+            style={{ fontSize: 'clamp(1.75rem, 5vw + 0.5rem, 3rem)', fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" }}
+          >
+            aren’t created by adding more, but by understanding what truly matters and
+          </span>
+          {" "}removing everything else.
         </motion.h1>
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mt-16">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-muted-foreground max-w-lg border-t border-border pt-6"
-          >
-            I work with brands globally to build pixel-perfect, engaging, and
-            accessible digital experiences that drive results and achieve
-            business goals.
-          </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background rounded-full font-medium hover:bg-foreground/90 transition-colors"
+        {/* Bottom Section - Responsive Layout */}
+        <div className="flex flex-col gap-6 sm:gap-8 mt-6 sm:mt-8">
+          {/* Top Row: Divider and Bio - Stack on mobile */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-8 md:gap-12">
+            {/* Divider - Hidden on small mobile, visible from sm */}
+            <motion.div
+              initial={shouldReduceMotion ? {} : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.4 }}
+              className="hidden sm:block flex-shrink-0 relative overflow-hidden"
+              style={{ width: 'clamp(140px, 24vw, 360px)', height: '74px' }}
+              aria-hidden="true"
             >
-              Know me better
-            </Link>
-          </motion.div>
+              <div className="absolute bottom-0 left-0 w-full border-t border-border dark:border-gray-700" />
+              <HeroDividerTruckLoader />
+            </motion.div>
+
+            {/* Bio */}
+            <motion.p
+              initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.5 }}
+              className="bio text-[#0A0A0A] dark:text-gray-300"
+              style={{ fontSize: '19px' }}
+            >
+              Aspiring web developer learning modern frontend technologies and building responsive applications.
+            </motion.p>
+          </div>
+
+          {/* Bottom Row: Social Links and Button - Stack on mobile */}
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-8 sm:gap-12 md:gap-16 pt-4 sm:pt-6">
+            {/* Left: Social Links */}
+            <motion.div
+              initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.6 }}
+              className="flex flex-wrap gap-6 sm:gap-8"
+              aria-label="Social media links"
+            >
+              {[
+                { name: "LinkedIn", url: "https://linkedin.com", Icon: Linkedin, hoverClass: "hover:text-[#0A66C2]" },
+                { name: "GitHub", url: "https://github.com", Icon: Github, hoverClass: "hover:text-black dark:hover:text-white" },
+                { name: "Email", url: "mailto:arunchavan1729@gmail.com", Icon: Mail, hoverClass: "hover:text-[#E8705A]" },
+                { name: "Phone", url: "tel:+919611155036", Icon: Phone, hoverClass: "hover:text-[#E8705A] dark:hover:text-[#B5FF6D]" },
+              ].map((social) => (
+                <a
+                  key={social.name}
+                  href={social.url}
+                  className={`text-muted-foreground ${social.hoverClass} transition-colors duration-200 p-2 -m-2`}
+                  aria-label={social.name}
+                  rel="noopener noreferrer"
+                  target={social.name !== "Email" && social.name !== "Phone" ? "_blank" : undefined}
+                >
+                  <social.Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                </a>
+              ))}
+            </motion.div>
+
+            {/* Right: Button */}
+            <motion.div
+              initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.7 }}
+              className="self-start sm:self-auto"
+            >
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3 border-2 border-foreground text-foreground rounded-full font-medium hover:bg-foreground hover:text-background transition-all duration-200 text-sm sm:text-base"
+              >
+                Know me better
+              </Link>
+            </motion.div>
+          </div>
         </div>
-
-        {/* Social Links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex items-center gap-6 mt-12"
-        >
-          {[
-            { name: "LINKEDIN", url: "#" },
-            { name: "GITHUB", url: "#" },
-            { name: "INSTAGRAM", url: "#" },
-            { name: "GMAIL", url: "#" },
-          ].map((social) => (
-            <a
-              key={social.name}
-              href={social.url}
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
-            >
-              {social.name}
-              <ArrowUpRight className="w-3 h-3" />
-            </a>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

@@ -1,28 +1,32 @@
-import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, Linkedin, Github, Instagram, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <footer className="py-24 px-6 border-t border-border">
+    <footer className="py-16 sm:py-20 md:py-24 px-14 sm:px-24 md:px-36 lg:px-48">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
+        <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 mb-12 sm:mb-14 md:mb-16">
           <div>
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-6xl font-bold mb-6"
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.4 }}
+              className="sudeep mb-4"
             >
               Let's work{" "}
-              <span className="text-primary">together</span>
+              <span className="shivatej">together</span>
             </motion.h2>
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-muted-foreground max-w-md"
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: shouldReduceMotion ? 0 : 0.1 }}
+              className="ashu"
+              style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '0.875rem', fontWeight: 500, lineHeight: '1.6' }}
             >
               Have a project in mind? Let's create something amazing together.
             </motion.p>
@@ -30,38 +34,45 @@ const Footer = () => {
 
           <div className="flex flex-col md:items-end justify-end">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: shouldReduceMotion ? 0 : 0.2 }}
             >
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium text-lg hover:bg-primary/90 transition-colors"
+                className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-foreground text-foreground rounded-full font-medium text-sm sm:text-base hover:bg-foreground hover:text-background transition-all duration-200 focus:outline-none"
               >
                 Get in Touch
-                <ArrowUpRight className="w-5 h-5" />
+                <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </Link>
             </motion.div>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border">
-          <div className="flex items-center gap-6 mb-4 md:mb-0">
-            {["LinkedIn", "GitHub", "Instagram", "Gmail"].map((social) => (
+        <div className="flex flex-col md:flex-row items-center justify-between pt-6 sm:pt-8 border-t border-border">
+          <div className="flex items-center gap-6 mb-6 md:mb-0">
+            {[
+              { name: "LinkedIn", url: "https://linkedin.com", Icon: Linkedin, hoverClass: "hover:text-[#0A66C2]" },
+              { name: "GitHub", url: "https://github.com", Icon: Github, hoverClass: "hover:text-black dark:hover:text-white" },
+              { name: "Instagram", url: "https://instagram.com", Icon: Instagram, hoverClass: "hover:text-[#E4405F]" },
+              { name: "Gmail", url: "mailto:arunchavan1729@gmail.com", Icon: Mail, hoverClass: "hover:text-[#E8705A]" },
+            ].map((social) => (
               <a
-                key={social}
-                href="#"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+                key={social.name}
+                href={social.url}
+                target={social.name !== "Gmail" ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className={`text-muted-foreground ${social.hoverClass} transition-colors duration-200 p-2 -m-2 focus:outline-none focus:ring-2 focus:ring-primary rounded`}
+                aria-label={social.name}
               >
-                {social}
-                <ArrowUpRight className="w-3 h-3" />
+                <social.Icon className="w-5 h-5" />
               </a>
             ))}
           </div>
-          <p className="text-sm text-muted-foreground">
-            © 2024 Devraj Chatribin. All rights reserved.
-          </p>
+          <div className="text-center mt-8 text-sm text-gray-600 dark:text-gray-400" style={{ fontFamily: '__Satoshi_4a0ccf, system-ui, -apple-system, sans-serif', fontWeight: 500 }}>
+            Made with ❤️ by Arun.
+          </div>
         </div>
       </div>
     </footer>

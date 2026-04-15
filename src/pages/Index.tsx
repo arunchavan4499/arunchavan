@@ -7,19 +7,16 @@ import SkillsMarquee from "@/components/SkillsMarquee";
 import ExpertiseSection from "@/components/ExpertiseSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
+import Projects from "./Projects";
+import { Contact } from "lucide-react";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <MarqueeSection />
       <AboutSection />
-      <ProjectsSection />
-      <SkillsMarquee />
-      <ExpertiseSection />
-      <TestimonialsSection />
-      <Footer />
+      <Projects />
     </div>
   );
 };
