@@ -185,7 +185,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link
           to="/"
-          className="relative z-10 font-bold text-foreground text-base sm:text-lg focus:outline-none rounded-md px-1"
+          className="relative z-10 font-black text-foreground text-base sm:text-lg focus:outline-none rounded-md px-1"
           aria-label="Home"
         >
           AC

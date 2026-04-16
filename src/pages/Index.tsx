@@ -17,6 +17,7 @@ const Index = () => {
       <HeroSection />
       <AboutSection />
       <Projects />
+    
     </div>
   );
 };

@@ -15,18 +15,38 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.4 }}
-              className="sudeep mb-4"
+              className="mb-4 text-[clamp(1.9rem,3.8vw,2.7rem)] leading-[1.05] text-foreground"
+              style={{
+                fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+                fontWeight: 600,
+                letterSpacing: "0.02em",
+              }}
             >
               Let's work{" "}
-              <span className="shivatej">together</span>
+              <span
+                className="text-primary"
+                style={{
+                  fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+                  fontWeight: 600,
+                  letterSpacing: "0.02em",
+                }}
+              >
+                together
+              </span>
             </motion.h2>
             <motion.p
               initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: shouldReduceMotion ? 0 : 0.1 }}
-              className="ashu"
-              style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '0.875rem', fontWeight: 500, lineHeight: '1.6' }}
+              className="max-w-xl text-muted-foreground"
+              style={{
+                fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                letterSpacing: "0.008em",
+                fontSize: "0.99rem",
+                fontWeight: 500,
+                lineHeight: "1.6",
+              }}
             >
               Have a project in mind? Let's create something amazing together.
             </motion.p>

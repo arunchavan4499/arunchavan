@@ -20,6 +20,7 @@ import SkillsHeading from "@/components/SkillsHeading";
 import GitHubHeatmap from "@/components/GitHubHeatmap";
 import GlareHover from "@/components/GlareHover";
 import LetsTalkInnerLoader from "@/components/LetsTalkInnerLoader";
+import EducationSection from "@/components/EducationSection";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -262,7 +263,7 @@ const About = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               className="relative mx-auto md:mx-0 md:w-auto"
-              style={{ width: 'clamp(200px, 80vw, 384px)', height: 'clamp(270px, 100vw, 512px)' }}
+              style={{ width: 'clamp(200px, 80vw, 384px)', height: 'clamp(300px, 100vw, 560px)' }}
             >
               <GlareHover
                 width="100%"
@@ -290,13 +291,13 @@ const About = () => {
               {/* Rotating "Let's Talk" CTA Button */}
               <Link
                 to="/contact"
-                className="group bg-background border-2 border-current text-foreground absolute right-0 bottom-0 grid aspect-square h-fit w-[40%] place-content-center rounded-full p-3 shadow hover:bg-foreground hover:text-background group-hover:border-background transition-all duration-200 focus:outline-none"
+                className="group bg-background border-2 border-current text-foreground absolute right-0 bottom-0 grid aspect-square h-fit w-[45%] place-content-center rounded-full p-3 shadow hover:bg-foreground hover:text-background group-hover:border-background transition-all duration-200 focus:outline-none"
               >
                 <div
                   className="border-current group-hover:border-background absolute rounded-full border flex items-center justify-center"
                   style={{
-                    width: "54px",
-                    height: "54px",
+                    width: "60px",
+                    height: "60px",
                     borderRadius: "50%",
                     overflow: "hidden",
                     display: "flex",
@@ -331,10 +332,10 @@ const About = () => {
                       style={{
                         '--index': index,
                         '--total': letsTalkCircleText.length,
-                        '--radius': 52,
+                        '--radius': 58,
                         transform: `translate(-50%, -50%)
                         rotate(calc(360deg / var(--total) * var(--index)))
-                        translateY(calc(var(--radius, 52) * -1px))`,
+                        translateY(calc(var(--radius, 58) * -1px))`,
                         transformOrigin: 'center center',
                         opacity: 1,
                         color: 'currentColor',
@@ -356,8 +357,8 @@ const About = () => {
               className="w-full space-y-6 mt-6 md:mt-0"
               style={{ paddingLeft: '9px', }}
             >
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-balance" style={{ fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", fontSize: 'clamp(1.5rem, 8vw, 3.75rem)', lineHeight: '1.1', wordSpacing: '0.05em', letterSpacing: '0.01em', fontWeight: 500, }}>
-                A <span className="text-primary" style={{ fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", fontSize: 'clamp(1.5rem, 8vw, 3.75rem)', lineHeight: '1.1', wordSpacing: '0.02em', letterSpacing: '0.01em', fontWeight: 500, }}>creative developer</span>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-balance" style={{ fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", fontSize: '72px', lineHeight: '1.1', letterSpacing: '0.01em', fontWeight: 500, }}>
+                A <span className="text-primary" style={{ fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", fontSize: '72px', lineHeight: '1.1', wordSpacing: '0.02em', letterSpacing: '0.01em', fontWeight: 500, }}>creative developer</span>
                 <br />& digital designer
               </h1>
               <p className="text-muted-foreground text-balance max-w-2xl"
@@ -367,7 +368,7 @@ const About = () => {
               </p>
               <div >
                 <DropdownMenu open={resumeOpen} onOpenChange={setResumeOpen}>
-                  <DropdownMenuTrigger className="inline-flex items-center gap-2 px-6 py-3 border border-foreground rounded-full text-foreground hover:bg-foreground hover:text-background transition-all duration-300">
+                  <DropdownMenuTrigger className="inline-flex items-center gap-2 px-6 py-2 border border-foreground rounded-full text-foreground hover:bg-foreground hover:text-background transition-all duration-300">
                     My Resume
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start">
@@ -391,7 +392,11 @@ const About = () => {
         </div>
       </section>
       {/* Skills Section */}
-      <SkillsHeading count={16} />
+      <section className="px-14 sm:px-24 md:px-36 lg:px-48 pt-4">
+        <div className="max-w-7xl mx-auto">
+          <SkillsHeading count={20} />
+        </div>
+      </section>
 
       <SkillsMarquee />
       {/* Experience Section - Accordion */}
@@ -414,6 +419,11 @@ const About = () => {
                 </motion.span>
                 <span
                   className="text-sm uppercase tracking-widest text-primary"
+                  style={{
+                    fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                    fontWeight: 500,
+                    letterSpacing: "0.10em",
+                  }}
                 >
                   Work History
                 </span>
@@ -423,7 +433,12 @@ const About = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="experience-heading mb-4"
+                className="mb-4 text-[clamp(1.9rem,3.8vw,2.7rem)] leading-[1.05] text-foreground"
+                style={{
+                  fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+                  fontWeight: 500,
+                  letterSpacing: "0.01em",
+                }}
               >
                 Experience
               </motion.h2>
@@ -433,8 +448,14 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="ashu"
-                style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '1rem', fontWeight: 500, lineHeight: '1.6' }}>
+                className="max-w-xl text-muted-foreground"
+                style={{
+                  fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                  letterSpacing: "0.008em",
+                  fontSize: "0.99rem",
+                  fontWeight: 500,
+                  lineHeight: "1.6",
+                }}>
 
                 {/* I have worked with some of the most innovative industry leaders to help build their top-notch products. */}
                 A brief overview of my professional journey and the roles I've embraced along the way.
@@ -449,6 +470,8 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      <EducationSection />
 
       {/* Certificates Section */}
       <CertificatesSection />
@@ -469,8 +492,15 @@ const About = () => {
             >
               <Sparkles className="w-4 h-4 text-primary" />
             </motion.span>
-            <span className="text-sm uppercase tracking-widest text-primary">
-              Steps I follow
+            <span
+              className="text-sm uppercase tracking-widest text-primary"
+              style={{
+                fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                fontWeight: 500,
+                letterSpacing: "0.10em",
+              }}
+            >
+              Steps I Follow
             </span>
           </motion.div>
 
@@ -478,7 +508,12 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12 my-design-process"
+            className="mb-12 text-[clamp(1.9rem,3.8vw,2.7rem)] leading-[1.05] text-foreground"
+            style={{
+              fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+              fontWeight: 500,
+              letterSpacing: "0.01em",
+            }}
           >
             My Design Process
           </motion.h2>
@@ -510,8 +545,12 @@ const About = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 + 0.1 }}
-                      className="mb-2 font-semibold"
-                      style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '0.9rem', fontWeight: 500, lineHeight: '1.6' }}
+                      className="mb-2 text-[0.98rem] leading-snug text-foreground"
+                      style={{
+                        fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+                        letterSpacing: "0.01em",
+                        fontWeight: 500,
+                      }}
                     >
                       {item.step}. {item.title}
                     </motion.h5>
@@ -521,8 +560,13 @@ const About = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 + 0.15 }}
-                      className="ashu"
-                      style={{ fontFamily: "'Santoshi', 'Satoshi', '__Satoshi_4a0ccf', -apple-system, sans-serif", fontSize: item.fontSize, fontWeight: 500 }}
+                      className="text-[0.94rem] text-muted-foreground"
+                      style={{
+                        fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                        fontWeight: 500,
+                        lineHeight: "1.65",
+                        letterSpacing: "0.006em",
+                      }}
                     >
                       {item.description}
                     </motion.p>

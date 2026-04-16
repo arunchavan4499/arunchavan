@@ -322,51 +322,67 @@ const GithubHeatmap = () => {
         <div className="w-full text-zinc-100">
             {/* 👇 NEW HEADER */}
             <div className="mb-3">
-                <div className="flex items-center gap-2">
-                    {profileUrl ? (
+                <div className="mb-1 flex items-start justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-2">
+                        {profileUrl ? (
+                            <a
+                                href={profileUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex h-[60px] w-[60px] shrink-0 overflow-hidden rounded-full border border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900"
+                                aria-label="Open GitHub profile"
+                            >
+                                {heatmap?.avatarUrl ? (
+                                    <img
+                                        src={heatmap.avatarUrl}
+                                        alt={avatarAlt}
+                                        className="h-full w-full object-cover"
+                                    />
+                                ) : (
+                                    <span className="inline-flex h-full w-full items-center justify-center">
+                                        <Github className="h-7 w-7 text-zinc-700 dark:text-zinc-200" />
+                                    </span>
+                                )}
+                            </a>
+                        ) : (
+                            <span className="inline-flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full border border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900">
+                                <Github className="h-7 w-7 text-zinc-700 dark:text-zinc-200" />
+                            </span>
+                        )}
+
+                        <div className="min-w-0">
+                            <h2
+                                className="m-0 text-2xl leading-none text-zinc-900 dark:text-white sm:text-3xl"
+                                style={{
+                                    fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+                                    letterSpacing: "0.005em",
+                                }}
+                            >
+                                <em style={{ fontStyle: "italic", fontWeight: 400 }}>Github</em>{" "}
+                                <strong style={{ fontStyle: "normal", fontWeight: 600 }}>Activity</strong>
+                            </h2>
+
+                            <p className="m-0 mt-1 text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                                Total:{" "}
+                                <span className="font-semibold text-zinc-900 dark:text-white">
+                                    {isLoading ? "..." : totalContributions}
+                                </span>{" "}
+                                contributions
+                            </p>
+                        </div>
+                    </div>
+
+                    {profileUrl && (
                         <a
                             href={profileUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex h-9 w-9 shrink-0 overflow-hidden rounded-full border border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900"
-                            aria-label="Open GitHub profile"
+                            className="ml-3 whitespace-nowrap pt-0.5 text-right text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
                         >
-                            {heatmap?.avatarUrl ? (
-                                <img
-                                    src={heatmap.avatarUrl}
-                                    alt={avatarAlt}
-                                    className="h-full w-full object-cover"
-                                />
-                            ) : (
-                                <span className="inline-flex h-full w-full items-center justify-center">
-                                    <Github className="h-5 w-5 text-zinc-700 dark:text-zinc-200" />
-                                </span>
-                            )}
+                            View Profile ↗
                         </a>
-                    ) : (
-                        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900">
-                            <Github className="h-5 w-5 text-zinc-700 dark:text-zinc-200" />
-                        </span>
                     )}
-
-                    <div className="inline-flex items-center">
-                        <h2 className="text-2xl font-bold text-zinc-900 dark:text-white sm:text-3xl " style={{ fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" }}>
-                            GitHub Activity
-                        </h2>
-                    </div>
                 </div>
-
-                {/* <p className="text-sm text-zinc-400 mt-1">
-                {heatmap?.username}'s coding journey over the past year
-            </p> */}
-
-                <p className="mt-1 text-sm font-medium text-zinc-700 dark:text-zinc-300">
-                    Total:{" "}
-                    <span className="font-semibold text-zinc-900 dark:text-white">
-                        {isLoading ? "..." : totalContributions}
-                    </span>{" "}
-                    contributions
-                </p>
             </div>
 
             <div className="rounded-md border border-zinc-700/55 bg-[#070d18] px-3 py-3 sm:px-5 sm:py-4">

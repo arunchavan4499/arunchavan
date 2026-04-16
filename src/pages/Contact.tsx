@@ -51,7 +51,14 @@ const Contact = () => {
                 >
                   <Sparkles className="w-4 h-4 text-primary" />
                 </motion.span>
-                <span className="text-sm uppercase tracking-widest text-primary">
+                <span
+                  className="text-sm uppercase tracking-widest text-primary"
+                  style={{
+                    fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                    fontWeight: 500,
+                    letterSpacing: "0.10em",
+                  }}
+                >
                   Get in Touch
                 </span>
               </motion.div>
@@ -59,24 +66,18 @@ const Contact = () => {
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="font-bold mb-6"
+                className="mb-6 text-[clamp(1.9rem,3.8vw,2.7rem)] leading-[1.05] text-foreground"
                 style={{
                   fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
-                  fontSize: 'clamp(1.5rem, 8vw, 3.75rem)',
-                  lineHeight: '1.1',
-                  wordSpacing: '0.05em',
-                  letterSpacing: '0.01em',
-                  fontWeight: 505
+                  fontWeight: 600,
+                  letterSpacing: "0.01em",
                 }}
               >
                 Let's work{" "}
                 <span className="text-primary" style={{
                   fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
-                  fontSize: 'clamp(1.5rem, 8vw, 3.75rem)',
-                  lineHeight: '1.1',
-                  wordSpacing: '0.05em',
-                  letterSpacing: '0.01em',
-                  fontWeight: 505
+                  fontWeight: 600,
+                  letterSpacing: "0.01em",
                 }}>together</span>
               </motion.h1>
 
@@ -84,8 +85,14 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="ashu"
-                style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '1rem', fontWeight: 500, lineHeight: '1.6' }}
+                className="max-w-xl text-muted-foreground"
+                style={{
+                  fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                  letterSpacing: "0.008em",
+                  fontSize: "0.99rem",
+                  fontWeight: 500,
+                  lineHeight: "1.6",
+                }}
               >
                 Have a project in mind or just want to say hello? I'd love to hear
                 from you. Fill out the form or reach out through any of the channels
@@ -105,28 +112,62 @@ const Contact = () => {
                       <div className="relative">
                         <div className="w-3 h-3 rounded-full bg-[#a364ff] status-blink" />
                       </div>
-                      <span className="text-sm font-medium text-foreground" style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '1rem', fontWeight: 500, lineHeight: '1.6' }}>Open to work</span>
+                      <span
+                        className="text-sm text-foreground"
+                        style={{
+                          fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                          fontWeight: 600,
+                          letterSpacing: "0.006em",
+                        }}
+                      >
+                        Open to work
+                      </span>
                     </div>
 
                     <div className="flex items-center gap-4 mb-4">
                       <div className="flex-shrink-0">
                         <div className="h-20 w-20 rounded-full overflow-hidden border border-border/60 shadow-lg">
                           <img
-                            src="/good."
+                            src="/luffy.jpg"
                             alt="Arun Chavan"
-                            className="h-full w-full object-cover"
+                            className="h-full w-full object-cover brightness-90"
                             style={{ objectPosition: "50% 24%" }}
                           />
                         </div>
                       </div>
                       <div>
-                        <h3 className="font-semibold text-lg">ARUN CHAVAN</h3>
-                        <p className="ashu" style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '0.8rem', fontWeight: 500, lineHeight: '1.6' }}>MEARN-DEVELOPER</p>
+                        <h3
+                          className="text-[1.05rem] leading-snug text-foreground"
+                          style={{
+                            fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+                            fontWeight: 500,
+                            letterSpacing: "0.01em",
+                          }}
+                        >
+                          ARUN CHAVAN
+                        </h3>
+                        <p
+                          className="text-[11px] uppercase text-muted-foreground"
+                          style={{
+                            fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                            fontWeight: 600,
+                            letterSpacing: "0.12em",
+                          }}
+                        >
+                          MEARN-DEVELOPER
+                        </p>
                       </div>
                     </div>
 
-                    <p className="ashu"
-                      style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '1rem', fontWeight: 500, lineHeight: '1.6' }}>
+                    <p
+                      className="text-[0.95rem] text-muted-foreground"
+                      style={{
+                        fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                        fontWeight: 500,
+                        lineHeight: "1.65",
+                        letterSpacing: "0.006em",
+                      }}
+                    >
 
                       My inbox is always open. Whether you have a project or just want to say Hi. I would love to hear from you. Feel free to contact me and I'll get back to you.
                     </p>
@@ -144,8 +185,25 @@ const Contact = () => {
                         <Mail className="w-5 h-5 text-black dark:text-white" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1" style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '1rem', fontWeight: 500, lineHeight: '1.6' }}>Email</p>
-                        <p className="ashu" style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '1rem', fontWeight: 500, lineHeight: '1.6' }}>
+                        <p
+                          className="mb-1 text-[11px] uppercase text-muted-foreground"
+                          style={{
+                            fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                            fontWeight: 600,
+                            letterSpacing: "0.12em",
+                          }}
+                        >
+                          Email
+                        </p>
+                        <p
+                          className="text-[0.95rem] text-foreground"
+                          style={{
+                            fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                            fontWeight: 500,
+                            letterSpacing: "0.006em",
+                            lineHeight: "1.55",
+                          }}
+                        >
                           arunchavan1729@gmail.com
                         </p>
                       </div>
@@ -160,8 +218,27 @@ const Contact = () => {
                         <MapPin className="w-5 h-5 text-black dark:text-white" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1" style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '1rem', fontWeight: 500, lineHeight: '1.6' }}>Location</p>
-                        <p className="ashu" style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '1rem', fontWeight: 500, lineHeight: '1.6' }}>Karnataka, India</p>
+                        <p
+                          className="mb-1 text-[11px] uppercase text-muted-foreground"
+                          style={{
+                            fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                            fontWeight: 600,
+                            letterSpacing: "0.12em",
+                          }}
+                        >
+                          Location
+                        </p>
+                        <p
+                          className="text-[0.95rem] text-foreground"
+                          style={{
+                            fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                            fontWeight: 500,
+                            letterSpacing: "0.006em",
+                            lineHeight: "1.55",
+                          }}
+                        >
+                          Karnataka, India
+                        </p>
                       </div>
                     </div>
                   </div>

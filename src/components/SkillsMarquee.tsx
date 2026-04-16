@@ -304,7 +304,7 @@ const SkillsMarquee = () => {
 
   return (
     <section
-      className="relative flex items-center py-12 sm:py-14 md:py-16 overflow-hidden"
+      className="py-12 sm:py-14 md:py-16 px-14 sm:px-24 md:px-36 lg:px-48"
       aria-label="Skills and technologies"
     >
       <style>{`
@@ -313,7 +313,7 @@ const SkillsMarquee = () => {
           to { transform: translateX(-33.333%); }
         }
         .animate-marquee-slow {
-          animation: marquee-slow 22s linear infinite;
+          animation: marquee-slow 16s linear infinite;
           will-change: transform;
         }
         .animate-marquee-slow:hover {
@@ -335,6 +335,7 @@ const SkillsMarquee = () => {
           position: absolute;
           top: -24px;
           left: 0;
+          z-index: 5;
           font-size: 10px;
           font-weight: 700;
           color: hsl(var(--foreground));
@@ -384,56 +385,58 @@ const SkillsMarquee = () => {
         }
       `}</style>
 
-      <div
-        className="flex items-center gap-3 sm:gap-4 whitespace-nowrap animate-marquee-slow skills-row"
-        role="list"
-        aria-label="Technologies"
-      >
-        {tripled.map((skill, index) => (
-          <div
-            key={index}
-            className="skill-card flex h-12 sm:h-14 items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 flex-shrink-0"
-            role="listitem"
-            aria-label={skill.name}
-          >
-            <span
-              className={`${skill.name === "JavaScript" ? "w-7 h-7 sm:w-8 sm:h-8" : "w-8 h-8 sm:w-9 sm:h-9"} flex-shrink-0 block skill-icon`}
-              aria-hidden="true"
-              style={{
-                minWidth: skill.name === "JavaScript" ? "2rem" : "2.25rem",
-                minHeight: skill.name === "JavaScript" ? "2rem" : "2.25rem",
-                width: skill.name === "JavaScript" ? "2rem" : "2.25rem",
-                height: skill.name === "JavaScript" ? "2rem" : "2.25rem",
-              }}
+      <div className="relative mx-auto max-w-7xl overflow-hidden pt-7 -mt-7">
+        <div
+          className="flex items-center gap-3 sm:gap-4 whitespace-nowrap animate-marquee-slow skills-row"
+          role="list"
+          aria-label="Technologies"
+        >
+          {tripled.map((skill, index) => (
+            <div
+              key={index}
+              className="skill-card flex h-12 sm:h-14 items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 flex-shrink-0"
+              role="listitem"
+              aria-label={skill.name}
             >
-              {skill.svg}
-            </span>
-            <span className="skill-text">
-              <span className="skill-percent" aria-label={`${skillExpertise[skill.name] ?? 75} percent proficiency`}>
-                {skillExpertise[skill.name] ?? 75}%
+              <span
+                className={`${skill.name === "JavaScript" ? "w-7 h-7 sm:w-8 sm:h-8" : "w-8 h-8 sm:w-9 sm:h-9"} flex-shrink-0 block skill-icon`}
+                aria-hidden="true"
+                style={{
+                  minWidth: skill.name === "JavaScript" ? "2rem" : "2.25rem",
+                  minHeight: skill.name === "JavaScript" ? "2rem" : "2.25rem",
+                  width: skill.name === "JavaScript" ? "2rem" : "2.25rem",
+                  height: skill.name === "JavaScript" ? "2rem" : "2.25rem",
+                }}
+              >
+                {skill.svg}
               </span>
-              <span className="skill-name">{skill.name}</span>
-            </span>
-          </div>
-        ))}
-      </div>
+              <span className="skill-text">
+                <span className="skill-percent" aria-label={`${skillExpertise[skill.name] ?? 75} percent proficiency`}>
+                  {skillExpertise[skill.name] ?? 75}%
+                </span>
+                <span className="skill-name">{skill.name}</span>
+              </span>
+            </div>
+          ))}
+        </div>
 
-      <div
-        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[230px]"
-        style={{
-          background:
-            "linear-gradient(to right, hsl(var(--background)) 0px, hsl(var(--background)) 150px, hsl(var(--background) / 0.72) 195px, hsl(var(--background) / 0) 230px)",
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[230px]"
-        style={{
-          background:
-            "linear-gradient(to left, hsl(var(--background)) 0px, hsl(var(--background)) 150px, hsl(var(--background) / 0.72) 195px, hsl(var(--background) / 0) 230px)",
-        }}
-        aria-hidden="true"
-      />
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[32px] sm:w-[48px]"
+          style={{
+            background:
+              "linear-gradient(to right, hsl(var(--background)) 0px, hsl(var(--background)) 12px, hsl(var(--background) / 0.72) 24px, hsl(var(--background) / 0) 32px)",
+          }}
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[32px] sm:w-[48px]"
+          style={{
+            background:
+              "linear-gradient(to left, hsl(var(--background)) 0px, hsl(var(--background)) 12px, hsl(var(--background) / 0.72) 24px, hsl(var(--background) / 0) 32px)",
+          }}
+          aria-hidden="true"
+        />
+      </div>
     </section>
   );
 };

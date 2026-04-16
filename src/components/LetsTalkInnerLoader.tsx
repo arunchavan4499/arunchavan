@@ -1,22 +1,22 @@
 import styled from "styled-components";
 
 type LetsTalkInnerLoaderProps = {
-    className?: string;
+  className?: string;
 };
 
 const LetsTalkInnerLoader = ({ className }: LetsTalkInnerLoaderProps) => {
-    return (
-        <StyledWrapper className={className}>
-            <div className="sharingon">
-                <div className="ring">
-                    <div className="to" />
-                    <div className="to" />
-                    <div className="to" />
-                    <div className="circle" />
-                </div>
-            </div>
-        </StyledWrapper>
-    );
+  return (
+    <StyledWrapper className={className}>
+      <div className="sharingon">
+        <div className="ring">
+          <div className="to" />
+          <div className="to" />
+          <div className="to" />
+          <div className="circle" />
+        </div>
+      </div>
+    </StyledWrapper>
+  );
 };
 
 const StyledWrapper = styled.div`
@@ -29,22 +29,27 @@ const StyledWrapper = styled.div`
   border-radius: 50%;
 
   .sharingon {
+    --sharingan-size: 46px;
+    --ring-size: 33px;
+    --tomoe-size: 8px;
+
     width: 46px;
     height: 46px;
-    background-color: red;
+    background-color: #d71919;
     border: 4px solid black;
     border-radius: 50%;
     position: relative;
     flex-shrink: 0;
-    animation: rot 1s ease-in-out infinite;
+    animation: sharingon-rot 1s ease-in-out infinite;
+    will-change: transform;
   }
 
   .ring {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 33px;
-    height: 33px;
+    width: var(--ring-size);
+    height: var(--ring-size);
     border: 3px solid rgb(110 13 13 / 0.5);
     border-radius: 50%;
     transform: translate(-50%, -50%);
@@ -58,14 +63,14 @@ const StyledWrapper = styled.div`
   }
 
   .to {
-    width: 8px;
-    height: 8px;
+    width: var(--tomoe-size);
+    height: var(--tomoe-size);
   }
 
   .to:nth-child(1) {
     top: -4px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-40%);
   }
 
   .to::before {
@@ -98,10 +103,10 @@ const StyledWrapper = styled.div`
     transform: translate(-50%, -50%);
     width: 9px;
     height: 9px;
-    box-shadow: 0 0 6px 1px black;
+    box-shadow: 0 0 10px 1px black;
   }
 
-  @keyframes rot {
+  @keyframes sharingon-rot {
     0% {
       transform: rotate(0deg);
     }

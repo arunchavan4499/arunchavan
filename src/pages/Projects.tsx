@@ -4,6 +4,7 @@ import { useState, type MouseEvent } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ShowMoreLess from "@/components/ShowMoreLess";
+// import FooterCtaSection from "@/components/FooterCtaSection";
 
 type Project = {
   id: number;
@@ -226,7 +227,14 @@ const Projects = ({ embedded = false }: ProjectsProps) => {
           >
             <Sparkles className="w-4 sm:w-5 h-4 sm:h-5 text-primary" aria-hidden="true" />
           </motion.span>
-          <span className="text-base uppercase tracking-widest text-primary">
+          <span
+            className="text-sm uppercase tracking-widest text-primary"
+            style={{
+              fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+              fontWeight: 500,
+              letterSpacing: "0.10em",
+            }}
+          >
             My Work
           </span>
         </motion.div>
@@ -234,22 +242,32 @@ const Projects = ({ embedded = false }: ProjectsProps) => {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="heading text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-6 font-display section-heading"
-          style={{ wordSpacing: '0.10em', letterSpacing: '0.02em', fontSize: 'clamp(1.5rem, 8vw, 48px)', fontWeight: '500', }}
+          className="mb-6 text-[clamp(1.9rem,3.8vw,2.7rem)] leading-[1.05] text-foreground"
+          style={{
+            fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+            fontWeight: 500,
+            letterSpacing: "0.01em",
+          }}
         >
           My Projects
         </motion.h1>
 
-        <motion.p
+        {/* <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="ashu"
-          style={{ fontFamily: '__Satoshi_4a0ccf, -apple-system, sans-serif', wordSpacing: '0.10em', letterSpacing: '0.01em', fontSize: '1rem', fontWeight: 500, lineHeight: '1.6' }}>
+          className="max-w-xl text-muted-foreground"
+          style={{
+            fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+            letterSpacing: "0.008em",
+            fontSize: "0.99rem",
+            fontWeight: 500,
+            lineHeight: "1.6",
+          }}>
 
           A focused selection of work highlighting my skills, approach, and impact.
-        </motion.p>
+        </motion.p> */}
 
         <div className="mb-8 flex justify-end">
           <div className="flex items-center gap-3 text-sm" style={{ fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif" }}>

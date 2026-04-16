@@ -35,17 +35,35 @@ const CertificatesSection = () => {
                     viewport={{ once: true }}
                     className="flex items-center gap-2 mb-4"
                 >
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[radial-gradient(ellipse_at_center,_#F5957A_0%,_#E8705A_100%)] dark:bg-emerald-500/20">
-                        <Sparkles className="h-3.5 w-3.5 text-white dark:text-emerald-300" aria-hidden="true" />
-                    </div>
-                    <span className="text-sm uppercase tracking-widest text-primary">Credentials</span>
+                    <motion.span
+                        animate={{ opacity: [1, 0.35, 1] }}
+                        transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                        className="inline-flex"
+                    >
+                        <Sparkles className="w-4 h-4 text-primary" />
+                    </motion.span>
+                    <span
+                        className="text-sm uppercase tracking-widest text-primary"
+                        style={{
+                            fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                            fontWeight: 500,
+                            letterSpacing: "0.10em",
+                        }}
+                    >
+                        Credentials
+                    </span>
                 </motion.div>
 
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="section-heading mb-8"
+                    className="mb-8 text-[clamp(1.9rem,3.8vw,2.7rem)] leading-[1.05] text-foreground"
+                    style={{
+                        fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+                        fontWeight: 500,
+                        letterSpacing: "0.01em",
+                    }}
                 >
                     Certificates
                 </motion.h2>
@@ -63,14 +81,22 @@ const CertificatesSection = () => {
                             <div className="flex items-center justify-between gap-4">
                                 <div className="min-w-0">
                                     <h3
-                                        className="truncate text-base text-foreground"
-                                        style={{ fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", fontWeight: 500 }}
+                                        className="truncate text-[1.03rem] leading-snug text-foreground"
+                                        style={{
+                                            fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+                                            fontWeight: 500,
+                                            letterSpacing: "0.01em",
+                                        }}
                                     >
                                         {certificate.title}
                                     </h3>
                                     <p
-                                        className="text-sm text-muted-foreground"
-                                        style={{ fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif", fontWeight: 500 }}
+                                        className="text-[0.93rem] text-muted-foreground"
+                                        style={{
+                                            fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                                            fontWeight: 500,
+                                            letterSpacing: "0.005em",
+                                        }}
                                     >
                                         {certificate.issuer} • {certificate.year}
                                     </p>
@@ -86,7 +112,12 @@ const CertificatesSection = () => {
                                         <ExternalLink className="h-4 w-4 text-foreground" aria-hidden="true" />
                                     </a>
                                 ) : (
-                                    <span className="text-xs text-muted-foreground">Coming soon</span>
+                                    <span
+                                        className="text-xs text-muted-foreground"
+                                        style={{ fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif", fontWeight: 500 }}
+                                    >
+                                        Coming soon
+                                    </span>
                                 )}
                             </div>
                         </motion.div>

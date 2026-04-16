@@ -1,22 +1,21 @@
 import styled from "styled-components";
 
 const Card = () => {
-    return (
-        <StyledWrapper>
-            <div className="flip-card">
-                <div className="flip-card-inner">
-                    <div className="flip-card-front">
-                        <p className="title">FLIP CARD</p>
-                        <p>Hover Me</p>
-                    </div>
-                    <div className="flip-card-back">
-                        <p className="title">BACK</p>
-                        <p>Leave Me</p>
-                    </div>
-                </div>
-            </div>
-        </StyledWrapper>
-    );
+  return (
+    <StyledWrapper>
+      <div className="flip-card">
+        <div className="flip-card-inner">
+          <div className="flip-card-front">
+            <img src="/loffy.jpg" alt="Loffy" className="front-image" />
+          </div>
+          <div className="flip-card-back">
+            <p className="title">BACK</p>
+            <p>Leave Me</p>
+          </div>
+        </div>
+      </div>
+    </StyledWrapper>
+  );
 };
 
 const StyledWrapper = styled.div`
@@ -45,6 +44,8 @@ const StyledWrapper = styled.div`
     height: 100%;
     text-align: center;
     transition: transform 0.8s;
+    will-change: transform;
+    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
   }
 
@@ -56,6 +57,7 @@ const StyledWrapper = styled.div`
   .flip-card-back {
     box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
     position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -63,11 +65,16 @@ const StyledWrapper = styled.div`
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
     border: 1px solid coral;
     border-radius: 1rem;
+    overflow: hidden;
   }
 
   .flip-card-front {
+    position: relative;
+    transform: rotateY(0deg);
     background: linear-gradient(
       120deg,
       bisque 60%,
@@ -76,6 +83,16 @@ const StyledWrapper = styled.div`
       rgba(255, 127, 80, 0.603) 48%
     );
     color: coral;
+  }
+
+  .front-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   .flip-card-back {
