@@ -3,16 +3,22 @@ import { Sparkles } from "lucide-react";
 
 const educationData = [
     {
-        startYear: "2023",
-        endYear: "2026",
-        degree: "Bachelor of Computer Applications",
-        institution: "Bengaluru University",
+        startYear: "2024",
+        endYear: "2027",
+        degree: "BE-Computer Science and Engineering",
+        institution: "K S Institute Of Technology",
     },
     {
-        startYear: "2017",
-        endYear: "2021",
+        startYear: "2022",
+        endYear: "2024",
+        degree: "12th(PUC)",
+        institution: "V.B Darbar PU Collage",
+    },
+    {
+        startYear: "2019",
+        endYear: "2022",
         degree: "High School",
-        institution: "Isaac Newton High School",
+        institution: "Shree Amoghasidha High School",
     },
 ];
 

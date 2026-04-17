@@ -24,7 +24,7 @@ const projects: Project[] = [
     title: "Infinity – Student Notes & Chat App",
     category: "Development",
     year: "2024",
-    image: "public/proj1.png",
+    image: "/assets/proj1.png",
     description: "student notes and chat to help students with their studies",
     tint: "bg-[#a364ff]",
     repositoryUrl: "https://github.com/arunchavan4499/infinity-student-notes-chat-app",
@@ -35,7 +35,7 @@ const projects: Project[] = [
     title: "Student Attendance Management System",
     category: "Development",
     year: "2025",
-    image: "public/proj2.png",
+    image: "/assets/proj2.png",
     description: "student attendance management and progress tracking ",
     tint: "bg-[#cee8ff]",
     repositoryUrl: "https://github.com/arunchavan4499/student-attendance-management-system",
@@ -46,7 +46,7 @@ const projects: Project[] = [
     title: "QuantTradeAI – AI-Powered Stock Market Analysis",
     category: "Development",
     year: "2025",
-    image: "public/proj3.png",
+    image: "/assets/proj3.png",
     description: "AI-powered stock market analysis and prediction tools",
     tint: "bg-[#0D6E6E]",
     repositoryUrl: "https://github.com/arunchavan4499/quanttradeai",
@@ -57,7 +57,7 @@ const projects: Project[] = [
     title: "SmartSettle – Adaptive algorithm based payment route optimization system",
     category: "Development",
     year: "2025",
-    image: "public/proj4.png",
+    image: "/assets/proj4.png",
     description: "Adaptive algorithm based payment route optimization system",
     tint: "bg-[#ff79b0]",
     repositoryUrl: "https://github.com/arunchavan4499/SmartSettle",
@@ -68,29 +68,19 @@ const projects: Project[] = [
     title: "SmartSettle – Adaptive algorithm based payment route optimization system",
     category: "Development",
     year: "2025",
-    image: "public/proj4.png",
+    image: "/assets/proj5.png",
     description: "Adaptive algorithm based payment route optimization system",
     tint: "bg-[#ff79b0]",
     repositoryUrl: "https://github.com/arunchavan4499/SmartSettle",
     liveUrl: "https://quanttradeai.vercel.app",
   },
-  {
-    id: 6,
-    title: "SmartSettle – Adaptive algorithm based payment route optimization system",
-    category: "Development",
-    year: "2025",
-    image: "public/proj4.png",
-    description: "Adaptive algorithm based payment route optimization system",
-    tint: "bg-[#ff79b0]",
-    repositoryUrl: "https://github.com/arunchavan4499/SmartSettle",
-    liveUrl: "https://quanttradeai.vercel.app",
-  },
+
 
 ];
 
 const filterOptions = ["All", "Development", "Design"] as const;
 type FilterOption = (typeof filterOptions)[number];
-const VISIBLE_PROJECT_COUNT = 6;
+const HOME_VISIBLE_PROJECT_COUNT = 4;
 
 type ProjectsProps = {
   embedded?: boolean;
@@ -104,12 +94,13 @@ const Projects = ({ embedded = false }: ProjectsProps) => {
     if (activeFilter === "All") return true;
     return project.category.toLowerCase().includes(activeFilter.toLowerCase());
   });
-  const hasOverflowProjects = filteredProjects.length > VISIBLE_PROJECT_COUNT;
+  const previewCount = embedded ? HOME_VISIBLE_PROJECT_COUNT : filteredProjects.length;
+  const hasOverflowProjects = filteredProjects.length > previewCount;
   const primaryProjects = hasOverflowProjects
-    ? filteredProjects.slice(0, VISIBLE_PROJECT_COUNT)
+    ? filteredProjects.slice(0, previewCount)
     : filteredProjects;
   const overflowProjects = hasOverflowProjects
-    ? filteredProjects.slice(VISIBLE_PROJECT_COUNT)
+    ? filteredProjects.slice(previewCount)
     : [];
 
   const handleProjectMouseMove = (event: MouseEvent<HTMLDivElement>, projectId: number) => {
@@ -151,6 +142,9 @@ const Projects = ({ embedded = false }: ProjectsProps) => {
             <img
               src={project.image}
               alt={project.title}
+              onError={(event) => {
+                event.currentTarget.src = "/placeholder.svg";
+              }}
               className="project-spotlight-image w-full h-full object-cover transition-transform duration-500"
             />
           </div>
@@ -294,9 +288,9 @@ const Projects = ({ embedded = false }: ProjectsProps) => {
           {primaryProjects.map((project, index) => renderProjectCard(project, index))}
 
           {primaryProjects.length === 0 && (
-            <div className="md:col-span-2 h-[150px] w-full overflow-hidden flex items-center justify-center">
+            <div className="md:col-span-2 h-[250px] w-full overflow-hidden flex items-center justify-center">
               <img
-                src="/image.png"
+                src="./assets/notfound.png"
                 alt="No projects found"
                 className="h-full w-full object-contain dark:rounded-md dark:bg-white dark:p-1"
               />
@@ -313,7 +307,7 @@ const Projects = ({ embedded = false }: ProjectsProps) => {
           >
             <div className={`project-spotlight grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 ${centerHoverProjectId !== null ? "project-spotlight-center-active" : ""}`}>
               {overflowProjects.map((project, index) =>
-                renderProjectCard(project, index + VISIBLE_PROJECT_COUNT)
+                renderProjectCard(project, index + previewCount)
               )}
             </div>
           </ShowMoreLess>

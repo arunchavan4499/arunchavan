@@ -6,7 +6,7 @@ const Card = () => {
       <div className="flip-card">
         <div className="flip-card-inner">
           <div className="flip-card-front">
-            <img src="/loffy.jpg" alt="Loffy" className="front-image" />
+            <img src="luffy.jpg" alt="Luffy" className="front-image" />
           </div>
           <div className="flip-card-back">
             <p className="title">BACK</p>
@@ -91,8 +91,13 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(1);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+  }
+
+  .dark & .front-image {
+    filter: brightness(0.9);
   }
 
   .flip-card-back {

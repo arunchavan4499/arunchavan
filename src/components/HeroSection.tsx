@@ -7,7 +7,7 @@ const HeroSection = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="relative min-h-screen bg-background pt-24 sm:pt-32 md:pt-40 lg:pt-60 px-14 sm:px-24 md:px-36 lg:px-48 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
+    <section className="relative min-h-screen bg-background pt-20 sm:pt-28 md:pt-36 lg:pt-56 px-14 sm:px-24 md:px-36 lg:px-48 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
       <div className="absolute inset-0" aria-hidden="true">
         {/* Ballpit was removed on request. Re-add it in this background container if asked later. */}
         <div className="absolute inset-0 pointer-events-none">
@@ -23,7 +23,7 @@ const HeroSection = () => {
           initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.2 }}
-          className="flex items-center gap-2 sm:gap-3 mb-8 sm:mb-10"
+          className="flex items-center gap-2 sm:gap-3 mb-5 sm:mb-7"
         >
           <motion.svg
             xmlns="http://www.w3.org/2000/svg"

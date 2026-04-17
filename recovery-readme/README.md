@@ -25,7 +25,6 @@ This folder is a reconstruction log of what was changed in chat, written to help
     - Deploy icon opens live URL only when deployment exists.
   - Show more / Show less behavior added for project overflow when count is greater than 6.
 - Build recovery updates from this chat:
-  - Initial build failed due to missing `lovable-tagger` package at runtime.
   - `npm install` was run to restore dependencies.
   - Syntax typos fixed in page imports (`iimport` -> `import`) for About and Contact pages.
   - Truncated JSX endings were restored in About and Contact pages.
