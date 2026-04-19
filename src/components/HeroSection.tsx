@@ -3,6 +3,7 @@ import { Linkedin, Github, Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import HeroDividerTruckLoader from "@/components/HeroDividerTruckLoader";
 
+
 const HeroSection = () => {
   const shouldReduceMotion = useReducedMotion();
 
@@ -101,8 +102,8 @@ const HeroSection = () => {
               initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.5 }}
-              className="bio text-[#0A0A0A] dark:text-gray-300"
-              style={{ fontSize: '19px' }}
+              className="font-medium text-muted-foreground dark:text-gray-500 text-sm sm:text-base md:text-lg"
+            style={{ fontFamily: "'Inter','Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", wordSpacing: '0.06em' }}
             >
               Aspiring web developer learning modern frontend technologies and building responsive applications.
             </motion.p>
@@ -146,9 +147,11 @@ const HeroSection = () => {
             >
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3 border-2 border-foreground text-foreground rounded-full font-medium hover:bg-foreground hover:text-background transition-all duration-200 text-sm sm:text-base"
+                className="relative overflow-hidden inline-flex items-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3 border-2 border-foreground text-foreground rounded-full font-medium text-sm sm:text-base transition-colors duration-[800ms] after:content-[''] after:absolute after:inset-0 after:bg-foreground after:origin-bottom after:z-0 after:pointer-events-none after:[transform:scaleY(0)] after:transition-[transform] after:duration-[800ms] after:[transition-timing-function:cubic-bezier(0.25,0.46,0.45,0.94)] hover:after:[transform:scaleY(1)] hover:text-background"
               >
-                Know me better
+                <span className="relative z-10">
+                  Know me better
+                </span>
               </Link>
             </motion.div>
           </div>

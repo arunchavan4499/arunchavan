@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import BorderGlow from "./BorderGlow";
+import CubeLoader from "./CubeLoader";
 
 const educationData = [
     {
@@ -69,7 +71,7 @@ export default function EducationSection() {
                             Education
                         </motion.h2>
 
-                        <motion.p
+                        {/* <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -83,11 +85,21 @@ export default function EducationSection() {
                                 lineHeight: "1.6",
                             }}
                         >
-                            Key milestones from my academic path that shaped my foundation in software and problem-solving.
-                        </motion.p>
+                           Academic highlights driving my growth in software and logic.
+                        </motion.p> */}
+
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="mt-28 flex justify-center"
+                        >
+                            <CubeLoader size={180} />
+                        </motion.div>
                     </div>
 
-                    <div className="border-t border-border pt-3">
+                    <div className="pt-3">
                         <div className="relative ml-2 border-l border-border/70 pl-6">
                             {educationData.map((item, index) => (
                                 <motion.article
@@ -96,41 +108,45 @@ export default function EducationSection() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="relative mb-3 rounded-2xl border border-border/70 bg-card/70 px-4 py-4 sm:px-5 last:mb-0"
+                                    className="relative mb-3 last:mb-0"
                                 >
-                                    <span className="absolute -left-[1.82rem] top-5 h-3 w-3 rounded-full border-2 border-background bg-primary ring-2 ring-primary/25" />
+                                    <span className="absolute -left-[1.82rem] top-5 h-3 w-3 rounded-full border-2 border-background bg-primary ring-2 ring-primary/25 pointer-events-none" />
 
-                                    <p
-                                        className="mb-1 text-[11px] uppercase tracking-[0.12em] text-primary"
-                                        style={{
-                                            fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
-                                            fontWeight: 600,
-                                        }}
-                                    >
-                                        {item.startYear} - {item.endYear}
-                                    </p>
+                                    <BorderGlow borderRadius={24} backgroundColor="hsl(var(--secondary))">
+                                        <div className="px-4 py-4 sm:px-5">
+                                            <p
+                                                className="mb-1 text-[11px] uppercase tracking-[0.12em] text-primary"
+                                                style={{
+                                                    fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                                                    fontWeight: 600,
+                                                }}
+                                            >
+                                                {item.startYear} - {item.endYear}
+                                            </p>
 
-                                    <h3
-                                        className="mb-1 text-[1.05rem] leading-snug text-foreground"
-                                        style={{
-                                            fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
-                                            fontWeight: 500,
-                                            letterSpacing: "0.01em",
-                                        }}
-                                    >
-                                        {item.degree}
-                                    </h3>
+                                            <h3
+                                                className="mb-1 text-[1.05rem] leading-snug text-foreground"
+                                                style={{
+                                                    fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+                                                    fontWeight: 500,
+                                                    letterSpacing: "0.01em",
+                                                }}
+                                            >
+                                                {item.degree}
+                                            </h3>
 
-                                    <p
-                                        className="text-[0.93rem] text-muted-foreground"
-                                        style={{
-                                            fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
-                                            fontWeight: 500,
-                                            letterSpacing: "0.005em",
-                                        }}
-                                    >
-                                        {item.institution}
-                                    </p>
+                                            <p
+                                                className="text-[0.93rem] text-muted-foreground dark:text-gray-500"
+                                                style={{
+                                                    fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                                                    fontWeight: 500,
+                                                    letterSpacing: "0.005em",
+                                                }}
+                                            >
+                                                {item.institution}
+                                            </p>
+                                        </div>
+                                    </BorderGlow>
                                 </motion.article>
                             ))}
                         </div>

@@ -2,50 +2,6 @@
 
 **A fast, accessible, and beautiful portfolio website** built with React 18, TypeScript, Tailwind CSS, and Framer Motion.
 
-## Latest UI Updates (April 2026)
-
-- Scroll-reactive navbar with glassmorphism behavior tuned for a clean hero view:
-	- At page top, navbar shell visually merges with the background.
-	- On scroll, navbar reveals with blur/border/shadow and shrinks smoothly.
-	- Navbar background remains transparent while preserving legibility.
-- Active route indicator updated to a non-jumping line style on desktop and mobile.
-- Dark mode toggle upgraded with View Transitions API circular reveal:
-	- Reveal expands from exact click position.
-	- Radius is viewport-safe using `Math.hypot`.
-	- Reduced-motion and non-support fallbacks toggle theme instantly.
-- Marquee section refined with duplicated-track seamless motion and tuned typography.
-
-## Copilot Chat Summary (April 14-15, 2026)
-
-This section summarizes the requests handled in this chat and the outcomes.
-
-### Project Page Requests
-
-- Added project card spotlight behavior where the hovered card zooms in while sibling cards blur/dim.
-- Refined the hover interaction so zoom activates only inside a center hover zone on each card.
-- Added project action icons:
-- GitHub icon opens repository URL when available.
-- Deploy icon appears only when a live URL exists.
-- Added project overflow behavior using the same Show more / Show less pattern used by the certificates section.
-- Toggle visibility is tied to project count greater than 6.
-
-### Build and Debug Work
-
-- Ran production build (`npm run build`) and resolved blockers in sequence.
-- Fixed syntax/import typos (`iimport` -> `import`) in `src/pages/About.tsx` and `src/pages/Contact.tsx`.
-- Repaired truncated JSX/component endings in `src/pages/About.tsx` and `src/pages/Contact.tsx`.
-
-### Final Status From This Chat
-
-- Build now succeeds with `npm run build`.
-- Build warning remains for stale Browserslist data.
-- `npm audit` reported vulnerabilities; dependency hardening was not applied in this chat.
-
-### Notes
-
-- During this conversation, some edits were reverted/reset and then reapplied as needed.
-- This summary captures the full request-and-fix flow, including intermediate failures and final successful build.
-
 ## Getting Started
 
 ### Prerequisites
@@ -98,8 +54,6 @@ npm run preview
 
 ## Technologies
 
-This project is built with:
-
 - **Vite** — Lightning-fast build tool
 - **React 18** — UI library
 - **TypeScript** — Type safety
@@ -113,13 +67,13 @@ This project is built with:
 ```sh
 npm run dev        # Start dev server
 npm run build      # Production build
-npm run test       # Run tests
 npm run lint       # Run linter
 ```
 
 ## Project Structure
 
 - `src/components/` — Reusable UI components
+- `src/components/ui/` — shadcn/UI primitives
 - `src/pages/` — Route pages
 - `src/hooks/` — Custom React hooks
 - `src/lib/` — Utility functions
@@ -142,7 +96,3 @@ Built-in dark mode support with localStorage persistence.
 - Toggle entrypoint: navbar desktop and mobile theme buttons
 - Transition: click-origin circular reveal via View Transitions API
 - Fallback: instant class toggle when View Transitions API is unavailable
-
----
-
-**Questions?** Check [.github/copilot-instructions.md](.github/copilot-instructions.md) for AI agent guidelines.

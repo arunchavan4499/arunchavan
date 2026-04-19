@@ -85,10 +85,10 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="max-w-xl text-muted-foreground"
+                className="max-w-xl text-muted-foreground dark:text-gray-500"
                 style={{
-                  fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
-                  letterSpacing: "0.008em",
+                  fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif",
+                  // letterSpacing: "0.008em",
                   fontSize: "0.99rem",
                   fontWeight: 500,
                   lineHeight: "1.6",
@@ -107,6 +107,7 @@ const Contact = () => {
               >
                 {/* Availability Status Card */}
                 <div className="w-full">
+                  <BorderGlow>
                   <div className="rounded-[23px] border border-border/60 bg-card/95 p-6 backdrop-blur-[2px]">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="relative">
@@ -120,7 +121,7 @@ const Contact = () => {
                           letterSpacing: "0.006em",
                         }}
                       >
-                        Open to work
+                        Available for Freelance 
                       </span>
                     </div>
 
@@ -140,18 +141,18 @@ const Contact = () => {
                           className="text-[1.05rem] leading-snug text-foreground"
                           style={{
                             fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
-                            fontWeight: 500,
+                            fontWeight: 600,
                             letterSpacing: "0.01em",
                           }}
                         >
                           ARUN CHAVAN
                         </h3>
                         <p
-                          className="text-[11px] uppercase text-muted-foreground"
+                          className="text-[11px] uppercase text-muted-foreground dark:text-gray-500"
                           style={{
-                            fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                            fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif",
                             fontWeight: 600,
-                            letterSpacing: "0.12em",
+                            letterSpacing: "0.10em",
                           }}
                         >
                           MEARN-DEVELOPER
@@ -160,9 +161,9 @@ const Contact = () => {
                     </div>
 
                     <p
-                      className="text-[0.95rem] text-muted-foreground"
+                      className="text-[0.95rem] text-muted-foreground dark:text-gray-500"
                       style={{
-                        fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                        fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif",
                         fontWeight: 500,
                         lineHeight: "1.65",
                         letterSpacing: "0.006em",
@@ -172,6 +173,7 @@ const Contact = () => {
                       My inbox is always open. Whether you have a project or just want to say Hi. I would love to hear from you. Feel free to contact me and I'll get back to you.
                     </p>
                   </div>
+                  </BorderGlow>
                 </div>
 
                 {/* Contact Methods */}
@@ -186,7 +188,7 @@ const Contact = () => {
                       </div>
                       <div className="flex-1">
                         <p
-                          className="mb-1 text-[11px] uppercase text-muted-foreground"
+                          className="mb-1 text-[11px] uppercase text-foreground"
                           style={{
                             fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
                             fontWeight: 600,
@@ -196,7 +198,7 @@ const Contact = () => {
                           Email
                         </p>
                         <p
-                          className="text-[0.95rem] text-foreground"
+                          className="text-[0.95rem] text-muted-foreground dark:text-gray-500"
                           style={{
                             fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
                             fontWeight: 500,
@@ -219,7 +221,7 @@ const Contact = () => {
                       </div>
                       <div className="flex-1">
                         <p
-                          className="mb-1 text-[11px] uppercase text-muted-foreground"
+                          className="mb-1 text-[11px] uppercase text-foreground"
                           style={{
                             fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
                             fontWeight: 600,
@@ -229,7 +231,7 @@ const Contact = () => {
                           Location
                         </p>
                         <p
-                          className="text-[0.95rem] text-foreground"
+                          className="text-[0.95rem] text-muted-foreground dark:text-gray-500"
                           style={{
                             fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
                             fontWeight: 500,
@@ -345,20 +347,22 @@ const Contact = () => {
 
                     <button
                       type="submit"
-                      className="group w-fit inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3 border border-foreground/55 text-foreground rounded-md sm:rounded-lg font-medium text-base sm:text-lg hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-200 focus:outline-none cursor-pointer"
+                      className="group relative overflow-hidden w-fit inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3 border border-foreground/55 text-foreground rounded-md sm:rounded-lg font-medium text-base sm:text-lg transition-colors duration-[800ms] after:content-[''] after:absolute after:inset-0 after:bg-foreground after:origin-bottom after:z-0 after:pointer-events-none after:[transform:scaleY(0)] after:transition-[transform] after:duration-[800ms] after:[transition-timing-function:cubic-bezier(0.25,0.46,0.45,0.94)] hover:after:[transform:scaleY(1)] hover:text-background focus:outline-none cursor-pointer"
                     >
-                      <div className="transition-all duration-200 group-hover:rotate-45">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 256 256"
-                          className="h-5 w-5"
-                          aria-hidden="true"
-                        >
-                          <path d="M227.32,28.68a16,16,0,0,0-15.66-4.08l-.15,0L19.57,82.84a16,16,0,0,0-2.49,29.8L102,154l41.3,84.87A15.86,15.86,0,0,0,157.74,248q.69,0,1.38-.06a15.88,15.88,0,0,0,14-11.51l58.2-191.94c0-.05,0-.1,0-.15A16,16,0,0,0,227.32,28.68ZM157.83,231.85l-.05.14,0-.07-40.06-82.3,48-48a8,8,0,0,0-11.31-11.31l-48,48L24.08,98.25l-.07,0,.14,0L216,40Z" />
-                        </svg>
-                      </div>
-                      Send Message
+                      <span className="relative z-10 inline-flex items-center justify-center gap-2">
+                        <div className="transition-all duration-200 group-hover:rotate-45">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 256 256"
+                            className="h-5 w-5"
+                            aria-hidden="true"
+                          >
+                            <path d="M227.32,28.68a16,16,0,0,0-15.66-4.08l-.15,0L19.57,82.84a16,16,0,0,0-2.49,29.8L102,154l41.3,84.87A15.86,15.86,0,0,0,157.74,248q.69,0,1.38-.06a15.88,15.88,0,0,0,14-11.51l58.2-191.94c0-.05,0-.1,0-.15A16,16,0,0,0,227.32,28.68ZM157.83,231.85l-.05.14,0-.07-40.06-82.3,48-48a8,8,0,0,0-11.31-11.31l-48,48L24.08,98.25l-.07,0,.14,0L216,40Z" />
+                          </svg>
+                        </div>
+                        Send Message
+                      </span>
                     </button>
                   </form>
                 </div>

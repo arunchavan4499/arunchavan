@@ -142,9 +142,6 @@ const Projects = ({ embedded = false }: ProjectsProps) => {
             <img
               src={project.image}
               alt={project.title}
-              onError={(event) => {
-                event.currentTarget.src = "/placeholder.svg";
-              }}
               className="project-spotlight-image w-full h-full object-cover transition-transform duration-500"
             />
           </div>
@@ -153,21 +150,21 @@ const Projects = ({ embedded = false }: ProjectsProps) => {
           <div className="min-w-0">
             <h3
               className="text-sm sm:text-base text-foreground/90 leading-tight mb-1.5"
-              style={{ fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif" }}
+              style={{ fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif" }}
             >
               {project.title}
             </h3>
             <p
-              className="text-sm sm:text-base text-muted-foreground leading-none"
-              style={{ fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif" }}
+              className="text-sm sm:text-base text-muted-foreground dark:text-gray-500 leading-none"
+              style={{ fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif" }}
             >
               {project.category}
             </p>
           </div>
           <div className="flex items-center gap-2.5 shrink-0">
             <span
-              className="text-sm sm:text-base text-muted-foreground leading-none"
-              style={{ fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif" }}
+             className="text-sm sm:text-base text-muted-foreground dark:text-gray-500 leading-none"
+              style={{ fontFamily: "'__Satoshi_4a0ccf, -apple-system, sans-serif" }}
             >
               {project.year}
             </span>

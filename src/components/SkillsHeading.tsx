@@ -17,7 +17,7 @@ const SkillsHeading = ({ count = 0 }: SkillsHeadingProps) => {
         <div className="flex items-center gap-1.5">
           <Layers className="h-3.5 w-3.5 text-muted-foreground/80" />
           <span
-            className="text-[14px] font-semibold tracking-widest text-muted-foreground uppercase"
+            className="text-[14px] font-semibold tracking-widest text-muted-foreground dark:text-gray-600 uppercase"
             style={{ fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif" }}
           >
             What I Bring
@@ -25,15 +25,15 @@ const SkillsHeading = ({ count = 0 }: SkillsHeadingProps) => {
         </div>
         <div className="flex items-center gap-2">
           <h2
-            className="text-3xl font-bold text-foreground leading-none"
-            style={{ fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif" }}
+            className="text-2xl font-bold text-muted-foreground dark:text-gray-600 leading-none"
+            style={{ fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif" }}
           >
             Skills
           </h2>
-          <span className="text-3xl font-bold text-foreground leading-none">·</span>
+          {/* <span className="text-3xl font-bold text-foreground leading-none">·</span> */}
         </div>
         {/* Underline */}
-        <div className="h-[2px] w-full bg-foreground/80 rounded-full mt-0.5" />
+        <div className="h-[2px] w-full bg-foreground/30 rounded-full mt-0.5" />
       </div>
 
       {/* Horizontal rule */}
@@ -41,8 +41,8 @@ const SkillsHeading = ({ count = 0 }: SkillsHeadingProps) => {
 
       {/* Count */}
       <span
-        className="flex-shrink-0 text-sm text-muted-foreground"
-        style={{ fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif" }}
+        className="flex-shrink-0 text-sm text-muted-foreground dark:text-gray-600 pl-15"
+        style={{ fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif", fontWeight: 800,  }}
       >
         {count} capabilities
       </span>

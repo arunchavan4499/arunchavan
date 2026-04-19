@@ -39,9 +39,9 @@ const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: shouldReduceMotion ? 0 : 0.1 }}
-              className="max-w-xl text-muted-foreground"
+              className="max-w-xl text-muted-foreground dark:text-gray-500 "
               style={{
-                fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif",
                 letterSpacing: "0.008em",
                 fontSize: "0.99rem",
                 fontWeight: 500,
@@ -61,10 +61,12 @@ const Footer = () => {
             >
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-foreground text-foreground rounded-full font-medium text-sm sm:text-base hover:bg-foreground hover:text-background transition-all duration-200 focus:outline-none"
+                className="group relative overflow-hidden inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-foreground text-foreground rounded-full font-medium text-sm sm:text-base transition-colors duration-[800ms] after:content-[''] after:absolute after:inset-0 after:bg-foreground after:origin-bottom after:z-0 after:pointer-events-none after:[transform:scaleY(0)] after:transition-[transform] after:duration-[800ms] after:[transition-timing-function:cubic-bezier(0.25,0.46,0.45,0.94)] hover:after:[transform:scaleY(1)] hover:text-background focus:outline-none"
               >
-                Get in Touch
-                <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                <span className="relative z-10 inline-flex items-center gap-2">
+                  Get in Touch
+                  <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </span>
               </Link>
             </motion.div>
           </div>
@@ -90,7 +92,7 @@ const Footer = () => {
               </a>
             ))}
           </div>
-          <div className="text-center mt-8 text-sm text-gray-600 dark:text-gray-400" style={{ fontFamily: '__Satoshi_4a0ccf, system-ui, -apple-system, sans-serif', fontWeight: 500 }}>
+          <div className="text-center mt-8 text-sm text-muted-foreground dark:text-gray-400" style={{ fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif", fontWeight: 600 }}>
             Made with ❤️ by Arun.
           </div>
         </div>

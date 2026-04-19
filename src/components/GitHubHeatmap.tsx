@@ -352,19 +352,19 @@ const GithubHeatmap = () => {
 
                         <div className="min-w-0">
                             <h2
-                                className="m-0 text-2xl leading-none text-zinc-900 dark:text-white sm:text-3xl"
+                                className="m-0 text-2xl  leading-none text-zinc-900 dark:text-white sm:text-3xl"
                                 style={{
                                     fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
                                     letterSpacing: "0.005em",
                                 }}
                             >
-                                <em style={{ fontStyle: "italic", fontWeight: 400 }}>Github</em>{" "}
+                                <em className="text-muted-foreground dark:text-gray-500" style={{ fontStyle: "italic", fontWeight: 500 }}>Github</em>{" "}
                                 <strong style={{ fontStyle: "normal", fontWeight: 600 }}>Activity</strong>
                             </h2>
 
-                            <p className="m-0 mt-1 text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                            <p className="ml-2 mt-1 text-sm font-medium text-zinc-700 dark:text-zinc-400">
                                 Total:{" "}
-                                <span className="font-semibold text-zinc-900 dark:text-white">
+                                <span className="font-semibold text-zinc-800 dark:text-white">
                                     {isLoading ? "..." : totalContributions}
                                 </span>{" "}
                                 contributions
@@ -377,9 +377,10 @@ const GithubHeatmap = () => {
                             href={profileUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="ml-3 whitespace-nowrap pt-0.5 text-right text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
+                            className="mt-5  mr-4 whitespace-nowrap pt-0. text-right text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:text-gray-500 dark:hover:text-white"
+                            style={{ fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif", wordSpacing: '0.10em', fontSize: '14px', fontWeight: 600 }}
                         >
-                            View Profile ↗
+                            View Profile 
                         </a>
                     )}
                 </div>

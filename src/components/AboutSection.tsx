@@ -313,7 +313,7 @@ const AboutSection = () => {
   const revealProgress = useTransform(smoothScrollProgress, [0, 0.65], [0, 1]);
 
   return (
-    <section className="pt-[40px] pb-[100px] px-14 sm:px-24 md:px-36 lg:px-48 bg-background">
+    <section className="pt-[10px] pb-[50px] px-14 sm:px-24 md:px-36 lg:px-48 bg-background">
       <div className="max-w-7xl mx-auto px-1 sm:px-2">
         <motion.div
           initial={shouldReduceMotion ? {} : { opacity: 0 }}
@@ -391,13 +391,48 @@ const AboutSection = () => {
               className="mt-6"
             >
               <p className="mb-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">Skills</p>
+              <style>{`
+                .skill-tooltip-about {
+                  position: absolute;
+                  bottom: 100%;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  margin-bottom: 8px;
+                  padding: 6px 12px;
+                  background: hsl(var(--foreground));
+                  color: hsl(var(--background));
+                  border-radius: 6px;
+                  font-size: 12px;
+                  font-weight: 600;
+                  white-space: nowrap;
+                  opacity: 0;
+                  pointer-events: none;
+                  transition: opacity 0.2s ease;
+                  z-index: 10;
+                }
+                .skill-tooltip-about::after {
+                  content: '';
+                  position: absolute;
+                  top: 100%;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  width: 0;
+                  height: 0;
+                  border-left: 4px solid transparent;
+                  border-right: 4px solid transparent;
+                  border-top: 4px solid hsl(var(--foreground));
+                }
+                .skill-card-about:hover .skill-tooltip-about {
+                  opacity: 1;
+                }
+              `}</style>
               <div className="grid grid-cols-10 items-center justify-items-center gap-2.5 sm:gap-3" aria-label="Core skills icons">
                 {aboutSkillIcons.map((skill) => (
                   <div
                     key={skill.name}
-                    title={skill.name}
-                    className="group flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-border/70 bg-card/90 p-2 shadow-sm transition-transform duration-200 hover:-translate-y-0.5"
+                    className="skill-card-about group relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-border/70 bg-card/90 p-2 shadow-sm transition-transform duration-200 hover:-translate-y-0.5"
                   >
+                    <div className="skill-tooltip-about">{skill.name}</div>
                     <div className="h-full w-full transition-transform duration-200 group-hover:scale-105">
                       {skill.svg}
                     </div>
