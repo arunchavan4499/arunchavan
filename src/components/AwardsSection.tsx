@@ -7,17 +7,17 @@ import Loader from "./Loader";
 const awards = [
     {
         id: 1,
-        title: "2nd Place — National Hackathon",
+        title: "2nd Place — National Level Hackathon",
         organization: "HIRE-4-THON 2026 • Team Project",
         date: "Mar 2026",
         logo: "🥈",
-        description: "Built an AI-powered web application within 24 hours as part of a collaborative team effort.",
+       description: "Achieved 2nd place at a national-level hackathon by developing an AI-powered web application within 24 hours, Competed against 75+ teams",
         details: [
-            "Built an AI-powered web application within 24 hours",
-            "Developed responsive UI using React.js & Tailwind CSS",
-            "Integrated REST APIs and enabled real-time interactions",
-            "Collaborated on architecture, UI/UX, and feature planning",
-            "Delivered a scalable solution recognized at national level",
+            "Built an AI-powered web application within 24 hours as part of a collaborative hackathon team",
+            "Developed a responsive and modern UI using React.js and Tailwind CSS",
+            "Integrated REST APIs to enable dynamic data flow and real-time interactions",
+            "Collaborated on system architecture, UI/UX design, and feature planning",
+           
         ],
     },
 

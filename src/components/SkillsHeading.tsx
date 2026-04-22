@@ -24,12 +24,12 @@ const SkillsHeading = ({ count = 0 }: SkillsHeadingProps) => {
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <h2
+          {/* <h2
             className="text-2xl font-bold text-muted-foreground dark:text-gray-600 leading-none"
             style={{ fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif" }}
           >
             Skills
-          </h2>
+          </h2> */}
           {/* <span className="text-3xl font-bold text-foreground leading-none">·</span> */}
         </div>
         {/* Underline */}

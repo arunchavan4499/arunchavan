@@ -73,24 +73,39 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-between pt-6 sm:pt-8 border-t border-border">
-          <div className="flex items-center gap-6 mb-6 md:mb-0">
-            {[
-              { name: "LinkedIn", url: "https://linkedin.com", Icon: Linkedin, hoverClass: "hover:text-[#0A66C2]" },
-              { name: "GitHub", url: "https://github.com", Icon: Github, hoverClass: "hover:text-black dark:hover:text-white" },
-              { name: "Instagram", url: "https://instagram.com", Icon: Instagram, hoverClass: "hover:text-[#E4405F]" },
-              { name: "Gmail", url: "mailto:arunchavan1729@gmail.com", Icon: Mail, hoverClass: "hover:text-[#E8705A]" },
-            ].map((social) => (
-              <a
-                key={social.name}
-                href={social.url}
-                target={social.name !== "Gmail" ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                className={`text-muted-foreground ${social.hoverClass} transition-colors duration-200 p-2 -m-2 focus:outline-none focus:ring-2 focus:ring-primary rounded`}
-                aria-label={social.name}
-              >
-                <social.Icon className="w-5 h-5" />
-              </a>
-            ))}
+
+          <div className="flex items-center gap-6 mb-6 md:mb-0 group">
+            <style>{`
+              .social-icon {
+                transition: all 0.3s ease;
+              }
+              
+              .social-icon:hover {
+                transform: scale(1.3);
+              }
+            `}</style>
+
+            {/* icons style */}
+            
+            <div className="social-icon-container flex items-center gap-6">
+              {[
+                { name: "LinkedIn", url: "https://linkedin.com", Icon: Linkedin, hoverClass: "hover:text-[#0A66C2]" },
+                { name: "GitHub", url: "https://github.com", Icon: Github, hoverClass: "hover:text-black dark:hover:text-white" },
+                { name: "Instagram", url: "https://instagram.com", Icon: Instagram, hoverClass: "hover:text-[#E4405F]" },
+                { name: "Gmail", url: "mailto:arunchavan1729@gmail.com", Icon: Mail, hoverClass: "hover:text-[#E8705A]" },
+              ].map((social) => (
+                <a
+                  key={social.name}
+                  href={social.url}
+                  target={social.name !== "Gmail" ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className={`text-muted-foreground ${social.hoverClass} social-icon transition-all duration-200 p-2 -m-2 focus:outline-none`}
+                  aria-label={social.name}
+                >
+                  <social.Icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
           </div>
           <div className="text-center mt-8 text-sm text-muted-foreground dark:text-gray-400" style={{ fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif", fontWeight: 600 }}>
             Made with ❤️ by Arun.

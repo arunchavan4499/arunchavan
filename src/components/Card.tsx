@@ -9,8 +9,9 @@ const Card = () => {
             <img src="luffy.jpg" alt="Luffy" className="front-image" />
           </div>
           <div className="flip-card-back">
-            <p className="title">BACK</p>
-            <p>Leave Me</p>
+            <p className="title text-foreground">"Power isn't determined by your size, but the size of your heart and dreams!"
+            </p>
+            <p className="title text-foreground">— Luffy</p>
           </div>
         </div>
       </div>
@@ -20,12 +21,14 @@ const Card = () => {
 
 const StyledWrapper = styled.div`
   width: 100%;
+  height: 100%;
 
   .flip-card {
     background-color: transparent;
     width: 100%;
+    height: 100%;
+    min-height: 400px;
     max-width: 420px;
-    aspect-ratio: 190 / 180;
     margin-inline: auto;
     perspective: 1000px;
     font-family: sans-serif;
@@ -110,6 +113,14 @@ const StyledWrapper = styled.div`
     );
     color: white;
     transform: rotateY(180deg);
+  }
+
+  .dark & .flip-card-back {
+    color: black;
+  }
+
+  .dark & .flip-card-back p {
+    color: black !important;
   }
 `;
 

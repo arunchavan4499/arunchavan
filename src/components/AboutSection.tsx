@@ -3,25 +3,36 @@ import { motion, useReducedMotion, useScroll, useSpring, useTransform, type Moti
 import { Sparkles } from "lucide-react";
 import Card from "./Card.tsx";
 
-const aboutRevealSegments = [
+const aboutRevealSegments: { text?: string; highlight?: boolean; br?: boolean }[] = [
   {
-    text: "I am Arun Chavan, a motivated web developer currently strengthening my skills in HTML, CSS, JavaScript, and Tailwind CSS. I am building hands-on experience with",
+    text: "I'm Arun Chavan-an aspiring",
     highlight: false,
   },
-  { text: "React and responsive", highlight: true },
-  { text: "user interfaces while continuously", highlight: false },
-  { text: "improving", highlight: true },
-  { text: "my", highlight: false },
-  { text: "problem-solving skills", highlight: true },
-  { text: "in full-stack development.", highlight: false },
+  { text: "Full Stack (MERN) Developer", highlight: true },
+  { text: "with hands-on experience in", highlight: false },
+  { text: "React and modern JavaScript", highlight: true },
+  { text: ", and a strong foundation in HTML, CSS, and Tailwind CSS. Currently, I'm building backend expertise with", highlight: false },
+  { text: "Node.js,Next.js", highlight: true },
+  { text: " and", highlight: false },
+  { text: "REST API development", highlight: true },
+  { text: ", while creating", highlight: false },
+  { text: "responsive and dynamic web applications", highlight: true },
+  { br: true },
+  { br: true },
+  { text: "I'm passionate about solving real-world problems through code and continuously improving my", highlight: false },
+  { text: "technical skills", highlight: true },
+  { text: ". I focus on writing", highlight: false },
+  { text: "efficient, scalable solutions", highlight: true },
+  { text: "and keeping up with modern development practices.", highlight: false },
 ];
 
-const aboutRevealWords = aboutRevealSegments.flatMap(segment =>
-  segment.text
+const aboutRevealWords = aboutRevealSegments.flatMap((segment, i) => {
+  if (segment.br) return [{ word: `br-${i}`, highlight: false, isBr: true }];
+  return segment.text!
     .split(" ")
     .filter(Boolean)
-    .map(word => ({ word, highlight: segment.highlight }))
-);
+    .map(word => ({ word, highlight: !!segment.highlight, isBr: false }));
+});
 
 const aboutSkillIcons = [
   {
@@ -303,14 +314,15 @@ const AboutSection = () => {
   const aboutTextRef = useRef<HTMLParagraphElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: aboutTextRef,
-    offset: ["start 0.96", "end 0.32"],
+    offset: ["start 0.95", "end 0.35"], // make the end bound higher up
   });
   const smoothScrollProgress = useSpring(scrollYProgress, {
-    stiffness: 42,
-    damping: 24,
-    mass: 0.9,
+    stiffness: 35, 
+    damping: 25,
+    mass: 1,
   });
-  const revealProgress = useTransform(smoothScrollProgress, [0, 0.65], [0, 1]);
+  // Wrap up the reveal at exactly 76% of the scroll journey as requested
+  const revealProgress = useTransform(smoothScrollProgress, [0, 0.76], [0, 1]);
 
   return (
     <section className="pt-[10px] pb-[50px] px-14 sm:px-24 md:px-36 lg:px-48 bg-background">
@@ -347,41 +359,60 @@ const AboutSection = () => {
           </motion.div>
 
           <div className="md:col-span-3">
-            <motion.p
+            <motion.div
               ref={aboutTextRef}
               className="text-left text-foreground dark:text-white [text-wrap:pretty]"
               style={{
                 fontSize: 'clamp(1rem, 1.4vw + 0.6rem, 1.35rem)',
                 fontFamily: "'__Satoshi_4a0ccf', system-ui, -apple-system, sans-serif",
                 wordSpacing: '0.03em',
-                lineHeight: '1.7',
+                lineHeight: '1.4',
                 fontWeight: 500,
                 letterSpacing: '0.01em',
               }}
             >
               {shouldReduceMotion ? (
                 <>
-                  I am Arun Chavan, a motivated web developer currently strengthening my skills in HTML, CSS, JavaScript, and Tailwind CSS. I am building hands-on experience with{" "}
-                  <span style={{ color: 'hsl(var(--primary))', fontSize: 'inherit' }}>React and responsive</span>
-                  {" user interfaces while continuously "}
-                  <span style={{ color: 'hsl(var(--primary))', fontSize: 'inherit' }}>improving</span>
-                  {" my "}
-                  <span style={{ color: 'hsl(var(--primary))', fontSize: 'inherit' }}>problem-solving skills</span>
-                  {" in full-stack development."}
+                  I'm Arun Chavan, an aspiring{" "}
+                  <span style={{ color: 'hsl(var(--primary))', fontSize: 'inherit' }}>Full Stack (MERN) Developer</span>
+                  {" with hands-on experience in "}
+                  <span style={{ color: 'hsl(var(--primary))', fontSize: 'inherit' }}>React and modern JavaScript</span>
+                  {", and a strong foundation in HTML, CSS, and Tailwind CSS. Currently, I'm building backend expertise with "}
+                  <span style={{ color: 'hsl(var(--primary))', fontSize: 'inherit' }}>Node.js, Next.js</span>
+                  {" and "}
+                  <span style={{ color: 'hsl(var(--primary))', fontSize: 'inherit' }}>REST API development</span>
+                  {", while creating "}
+                  <span style={{ color: 'hsl(var(--primary))', fontSize: 'inherit' }}>responsive and dynamic web applications</span>
+                  {"."}
+                  <span className="block w-full" style={{ height: '0.5em' }} aria-hidden="true" />
+                  {"I'm passionate about solving real-world problems through code and continuously improving my "}
+                  <span style={{ color: 'hsl(var(--primary))', fontSize: 'inherit' }}>technical skills</span>
+                  {". I focus on writing "}
+                  <span style={{ color: 'hsl(var(--primary))', fontSize: 'inherit' }}>efficient, scalable solutions</span>
+                  {" and keeping up with modern development practices."}
                 </>
               ) : (
-                aboutRevealWords.map(({ word, highlight }, index) => (
-                  <RevealWord
-                    key={`${index}-${word}`}
-                    word={word}
-                    highlight={highlight}
-                    index={index}
-                    total={aboutRevealWords.length}
-                    progress={revealProgress}
-                  />
-                ))
+                aboutRevealWords.map(({ word, highlight, isBr }, index) =>
+                  isBr ? (
+                    <span 
+                      key={word} 
+                      className="block w-full" 
+                      style={{ height: '0.45em' }} 
+                      aria-hidden="true" 
+                    />
+                  ) : (
+                    <RevealWord
+                      key={`${index}-${word}`}
+                      word={word}
+                      highlight={highlight}
+                      index={index}
+                      total={aboutRevealWords.length}
+                      progress={revealProgress}
+                    />
+                  )
+                )
               )}
-            </motion.p>
+            </motion.div>
             <hr className="mt-6 border-border/70 dark:border-border/60" aria-hidden="true" />
             <motion.div
               initial={shouldReduceMotion ? {} : { opacity: 0, y: 12 }}
@@ -390,7 +421,7 @@ const AboutSection = () => {
               transition={{ duration: shouldReduceMotion ? 0 : 0.45, delay: shouldReduceMotion ? 0 : 0.08 }}
               className="mt-6"
             >
-              <p className="mb-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">Skills</p>
+              <p className="mb-3 text-xs uppercase tracking-[0.18em] text-muted-foreground dark:text-gray-600">Skills</p>
               <style>{`
                 .skill-tooltip-about {
                   position: absolute;

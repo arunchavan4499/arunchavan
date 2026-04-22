@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { Linkedin, Github, Mail, Phone } from "lucide-react";
+import { Linkedin, Github, Mail, Phone, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 import HeroDividerTruckLoader from "@/components/HeroDividerTruckLoader";
 
@@ -103,7 +103,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.5 }}
               className="font-medium text-muted-foreground dark:text-gray-500 text-sm sm:text-base md:text-lg"
-            style={{ fontFamily: "'Inter','Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", wordSpacing: '0.06em' }}
+              style={{ fontFamily: "'Inter','Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", wordSpacing: '0.06em' }}
             >
               Aspiring web developer learning modern frontend technologies and building responsive applications.
             </motion.p>
@@ -116,19 +116,29 @@ const HeroSection = () => {
               initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.6, delay: shouldReduceMotion ? 0 : 0.6 }}
-              className="flex flex-wrap gap-6 sm:gap-8"
+              className="flex flex-wrap gap-6 sm:gap-8 social-icon-container"
               aria-label="Social media links"
             >
+              <style>{`
+                .hero-social-icon {
+                  transition: all 0.3s ease;
+                }
+                
+                .hero-social-icon:hover {
+                  transform: scale(1.3);
+                }
+              `}</style>
               {[
                 { name: "LinkedIn", url: "https://linkedin.com", Icon: Linkedin, hoverClass: "hover:text-[#0A66C2]" },
                 { name: "GitHub", url: "https://github.com", Icon: Github, hoverClass: "hover:text-black dark:hover:text-white" },
+                { name: "Instagram", url: "https://instagram.com", Icon: Instagram, hoverClass: "hover:text-[#E4405F]" },
                 { name: "Email", url: "mailto:arunchavan1729@gmail.com", Icon: Mail, hoverClass: "hover:text-[#E8705A]" },
-                { name: "Phone", url: "tel:+919611155036", Icon: Phone, hoverClass: "hover:text-[#E8705A] dark:hover:text-[#B5FF6D]" },
+
               ].map((social) => (
                 <a
                   key={social.name}
                   href={social.url}
-                  className={`text-muted-foreground ${social.hoverClass} transition-colors duration-200 p-2 -m-2`}
+                  className={`text-muted-foreground ${social.hoverClass} hero-social-icon transition-all duration-200 p-2 -m-2`}
                   aria-label={social.name}
                   rel="noopener noreferrer"
                   target={social.name !== "Email" && social.name !== "Phone" ? "_blank" : undefined}

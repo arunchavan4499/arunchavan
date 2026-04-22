@@ -7,13 +7,13 @@ const educationData = [
     {
         startYear: "2024",
         endYear: "2027",
-        degree: "BE-Computer Science and Engineering",
+        degree: "B.E. in Computer Science & Engineering",
         institution: "K S Institute Of Technology",
     },
     {
         startYear: "2022",
         endYear: "2024",
-        degree: "12th(PUC)",
+        degree: "Pre-University Course (12th - PUC)",
         institution: "V.B Darbar PU Collage",
     },
     {
