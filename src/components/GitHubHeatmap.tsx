@@ -332,8 +332,63 @@ const GithubHeatmap = () => {
                 )}
             </div>
 
-            {/* The detailed calendar/grid rendering was removed to keep this component minimal and safe for public builds. */}
-            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+            <div className="relative">
+                <div style={{ height: MONTH_LABEL_ROW_HEIGHT }}>
+                    <div style={{ position: "relative", marginLeft: 36 }}>
+                        {monthTicks.map((tick) => (
+                            <div
+                                key={tick.week + tick.label}
+                                className="text-sm text-zinc-500"
+                                style={{ position: "absolute", left: tick.week * (CELL_SIZE + CELL_GAP) }}
+                            >
+                                {tick.label}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="mt-2 flex items-start">
+                    {/* Day labels column */}
+                    <div style={{ width: 36 }}>
+                        <div style={{ height: MONTH_TO_GRID_GAP }} />
+                        {Array.from({ length: DAYS }).map((_, dayIndex) => (
+                            <div
+                                key={dayIndex}
+                                style={{ height: DAY_ROW_HEIGHT }}
+                                className="flex items-center justify-start"
+                            >
+                                <span className="text-xs text-zinc-500">
+                                    {dayIndex === 1 ? "Mon" : dayIndex === 3 ? "Wed" : dayIndex === 5 ? "Fri" : ""}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Calendar grid */}
+                    <div style={{ display: "flex", gap: `${CELL_GAP}px` }}>
+                        {Array.from({ length: weeksCount }).map((_, weekIndex) => (
+                            <div key={weekIndex} style={{ display: "flex", flexDirection: "column", gap: `${CELL_GAP}px` }}>
+                                {Array.from({ length: DAYS }).map((__, dayIndex) => {
+                                    const idx = weekIndex * DAYS + dayIndex;
+                                    const cell = cells[idx] ?? emptyCell();
+
+                                    return (
+                                        <div
+                                            key={`${weekIndex}-${dayIndex}`}
+                                            title={`${cell.date ?? ""}: ${cell.contributionCount} contribution${cell.contributionCount !== 1 ? "s" : ""}`}
+                                            aria-label={`${cell.date ?? ""}: ${cell.contributionCount} contributions`}
+                                            className={`rounded-sm ${getColor(cell.level)} border border-zinc-900/5`}
+                                            style={{ width: CELL_SIZE, height: CELL_SIZE }}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {errorMessage && <p className="text-red-500 mt-3">{errorMessage}</p>}
+            </div>
         </div>
     );
 };
