@@ -6,3 +6,8 @@
 # Optional: set a base directory if your repo root isn't the site root
 # [build.environment]
 #   NODE_VERSION = "16"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
