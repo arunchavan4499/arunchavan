@@ -11,13 +11,13 @@ const awards = [
         organization: "HIRE-4-THON 2026 • Team Project",
         date: "Mar 2026",
         logo: "🥈",
-       description: "Achieved 2nd place at a national-level hackathon by developing an AI-powered web application within 24 hours, Competed against 75+ teams",
+        description: "Achieved 2nd place at a national-level hackathon by developing an AI-powered web application within 24 hours, Competed against 75+ teams",
         details: [
             "Built an AI-powered web application within 24 hours as part of a collaborative hackathon team",
             "Developed a responsive and modern UI using React.js and Tailwind CSS",
             "Integrated REST APIs to enable dynamic data flow and real-time interactions",
             "Collaborated on system architecture, UI/UX design, and feature planning",
-           
+
         ],
     },
 
@@ -28,7 +28,7 @@ export default function AwardsSection() {
     const [openAwardId, setOpenAwardId] = useState<number | null>(null);
 
     return (
-        <section className="py-16 sm:py-20 md:py-24 px-14 sm:px-24 md:px-36 lg:px-48 bg-background">
+        <section className="py-16 sm:py-20 md:py-24 px-14 sm:px-24 md:px-36 lg:px-48">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     <div>

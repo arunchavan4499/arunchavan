@@ -317,7 +317,7 @@ const AboutSection = () => {
     offset: ["start 0.95", "end 0.35"], // make the end bound higher up
   });
   const smoothScrollProgress = useSpring(scrollYProgress, {
-    stiffness: 35, 
+    stiffness: 35,
     damping: 25,
     mass: 1,
   });
@@ -325,7 +325,7 @@ const AboutSection = () => {
   const revealProgress = useTransform(smoothScrollProgress, [0, 0.76], [0, 1]);
 
   return (
-    <section className="pt-[10px] pb-[50px] px-14 sm:px-24 md:px-36 lg:px-48 bg-background">
+    <section className="pt-[10px] pb-[50px] px-14 sm:px-24 md:px-36 lg:px-48">
       <div className="max-w-7xl mx-auto px-1 sm:px-2">
         <motion.div
           initial={shouldReduceMotion ? {} : { opacity: 0 }}
@@ -394,11 +394,11 @@ const AboutSection = () => {
               ) : (
                 aboutRevealWords.map(({ word, highlight, isBr }, index) =>
                   isBr ? (
-                    <span 
-                      key={word} 
-                      className="block w-full" 
-                      style={{ height: '0.45em' }} 
-                      aria-hidden="true" 
+                    <span
+                      key={word}
+                      className="block w-full"
+                      style={{ height: '0.45em' }}
+                      aria-hidden="true"
                     />
                   ) : (
                     <RevealWord

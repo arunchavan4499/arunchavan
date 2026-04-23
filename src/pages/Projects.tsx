@@ -163,7 +163,7 @@ const Projects = ({ embedded = false }: ProjectsProps) => {
           </div>
           <div className="flex items-center gap-2.5 shrink-0">
             <span
-             className="text-sm sm:text-base text-muted-foreground dark:text-gray-500 leading-none"
+              className="text-sm sm:text-base text-muted-foreground dark:text-gray-500 leading-none"
               style={{ fontFamily: "'__Satoshi_4a0ccf, -apple-system, sans-serif" }}
             >
               {project.year}
@@ -318,7 +318,7 @@ const Projects = ({ embedded = false }: ProjectsProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Navbar />
 
       {projectsContent}

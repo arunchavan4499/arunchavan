@@ -105,7 +105,7 @@ const About = () => {
     setResumeOpen(false);
   };
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Navbar />
 
       {/* Hero Section */}
@@ -265,7 +265,7 @@ const About = () => {
       {/* <CertificatesSection /> */}
 
       {/* Design Process Section */}
-      <section className="py-2 sm:py-4 md:py-8 px-14 sm:px-24 md:px-36 lg:px-48 bg-background">
+      <section className="py-2 sm:py-4 md:py-8 px-14 sm:px-24 md:px-36 lg:px-48">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}

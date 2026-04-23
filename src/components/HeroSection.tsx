@@ -8,13 +8,10 @@ const HeroSection = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="relative min-h-screen bg-background pt-20 sm:pt-28 md:pt-36 lg:pt-56 px-14 sm:px-24 md:px-36 lg:px-48 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
+    <section className="relative min-h-screen pt-20 sm:pt-28 md:pt-36 lg:pt-56 px-14 sm:px-24 md:px-36 lg:px-48 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
       <div className="absolute inset-0" aria-hidden="true">
-        {/* Ballpit was removed on request. Re-add it in this background container if asked later. */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute inset-0 bg-background/20" />
-          <div className="absolute inset-y-0 left-0 w-24 sm:w-32 md:w-40 bg-gradient-to-r from-background/70 to-transparent" />
-          <div className="absolute inset-y-0 right-0 w-24 sm:w-32 md:w-40 bg-gradient-to-l from-background/70 to-transparent" />
         </div>
       </div>
 

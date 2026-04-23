@@ -27,7 +27,7 @@ const certificates = [
 
 const CertificatesSection = () => {
     return (
-        <section className="py-16 sm:py-20 md:py-24 px-14 sm:px-24 md:px-36 lg:px-48 bg-background">
+        <section className="py-16 sm:py-20 md:py-24 px-14 sm:px-24 md:px-36 lg:px-48">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0 }}

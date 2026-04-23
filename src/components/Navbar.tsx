@@ -55,7 +55,7 @@ const Navbar = () => {
   const navMaxWidth = useTransform(scrollProgress, [0, 1], ["90rem", "68rem"]);
   const blurAmount = useTransform(shellReveal, [0, 1], [0, 22]);
   const saturationAmount = useTransform(shellReveal, [0, 1], [100, 165]);
-  const borderAlpha = useTransform(shellReveal, [0, 1], [0, 0.28]);
+  const borderAlpha = useTransform(shellReveal, [0, 1], [0, 0.12]);
   const shadowAlpha = useTransform(shellReveal, [0, 1], [0, 0.22]);
 
   const bgStartAlpha = useTransform(shellReveal, [0, 1], [0, 0]);

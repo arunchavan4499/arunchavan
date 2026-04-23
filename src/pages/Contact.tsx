@@ -31,7 +31,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Navbar />
 
       <section className="pt-20 md:pt-32 pb-16 md:pb-24 px-14 sm:px-24 md:px-36 lg:px-48">
@@ -108,71 +108,71 @@ const Contact = () => {
                 {/* Availability Status Card */}
                 <div className="w-full">
                   <BorderGlow>
-                  <div className="rounded-[23px] border border-border/60 bg-card/95 p-6 backdrop-blur-[2px]">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="relative">
-                        <div className="w-3 h-3 rounded-full bg-[#a364ff] status-blink" />
+                    <div className="rounded-[23px] border border-border/60 bg-card/95 p-6 backdrop-blur-[2px]">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="relative">
+                          <div className="w-3 h-3 rounded-full bg-[#a364ff] status-blink" />
+                        </div>
+                        <span
+                          className="text-sm text-foreground"
+                          style={{
+                            fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
+                            fontWeight: 600,
+                            letterSpacing: "0.006em",
+                          }}
+                        >
+                          Available for Freelance
+                        </span>
                       </div>
-                      <span
-                        className="text-sm text-foreground"
+
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="flex-shrink-0">
+                          <div className="h-20 w-20 rounded-full overflow-hidden border border-border/60 shadow-lg">
+                            <img
+                              src="/luffy.jpg"
+                              alt="Arun Chavan"
+                              className="h-full w-full object-cover brightness-90"
+                              style={{ objectPosition: "50% 24%" }}
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <h3
+                            className="text-[1.05rem] leading-snug text-foreground"
+                            style={{
+                              fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+                              fontWeight: 600,
+                              letterSpacing: "0.01em",
+                            }}
+                          >
+                            ARUN CHAVAN
+                          </h3>
+                          <p
+                            className="text-[11px] uppercase text-muted-foreground dark:text-gray-500"
+                            style={{
+                              fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif",
+                              fontWeight: 600,
+                              letterSpacing: "0.10em",
+                            }}
+                          >
+                            MEARN-DEVELOPER
+                          </p>
+                        </div>
+                      </div>
+
+                      <p
+                        className="text-[0.95rem] text-muted-foreground dark:text-gray-500"
                         style={{
-                          fontFamily: "__Satoshi_4a0ccf, -apple-system, sans-serif",
-                          fontWeight: 600,
+                          fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif",
+                          fontWeight: 500,
+                          lineHeight: "1.65",
                           letterSpacing: "0.006em",
                         }}
                       >
-                        Available for Freelance 
-                      </span>
+
+                        My inbox is always open. Whether you have a project or just want to say Hi. I would love to hear from you. Feel free to contact me and I'll get back to you.
+                      </p>
                     </div>
-
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="flex-shrink-0">
-                        <div className="h-20 w-20 rounded-full overflow-hidden border border-border/60 shadow-lg">
-                          <img
-                            src="/luffy.jpg"
-                            alt="Arun Chavan"
-                            className="h-full w-full object-cover brightness-90"
-                            style={{ objectPosition: "50% 24%" }}
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <h3
-                          className="text-[1.05rem] leading-snug text-foreground"
-                          style={{
-                            fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
-                            fontWeight: 600,
-                            letterSpacing: "0.01em",
-                          }}
-                        >
-                          ARUN CHAVAN
-                        </h3>
-                        <p
-                          className="text-[11px] uppercase text-muted-foreground dark:text-gray-500"
-                          style={{
-                            fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif",
-                            fontWeight: 600,
-                            letterSpacing: "0.10em",
-                          }}
-                        >
-                          MEARN-DEVELOPER
-                        </p>
-                      </div>
-                    </div>
-
-                    <p
-                      className="text-[0.95rem] text-muted-foreground dark:text-gray-500"
-                      style={{
-                        fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif",
-                        fontWeight: 500,
-                        lineHeight: "1.65",
-                        letterSpacing: "0.006em",
-                      }}
-                    >
-
-                      My inbox is always open. Whether you have a project or just want to say Hi. I would love to hear from you. Feel free to contact me and I'll get back to you.
-                    </p>
-                  </div>
                   </BorderGlow>
                 </div>
 
