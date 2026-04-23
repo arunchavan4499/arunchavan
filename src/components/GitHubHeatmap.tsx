@@ -10,8 +10,6 @@ const MONTH_TO_GRID_GAP = 8;
 const DAY_ROW_HEIGHT = CELL_SIZE + CELL_GAP;
 const DAY_LABEL_NUDGE_Y = -2;
 
-const GITHUB_GRAPHQL_ENDPOINT = "https://api.github.com/graphql";
-
 const CONTRIBUTIONS_QUERY = `
     query($login: String!) {
         user(login: $login) {
@@ -174,24 +172,18 @@ const normalizeCells = (cells: HeatmapCell[], weeksCount: number) => {
     ];
 };
 
-const fetchGitHubHeatmap = async (
-    username: string,
-    token: string
-): Promise<HeatmapPayload> => {
-    const response = await fetch(GITHUB_GRAPHQL_ENDPOINT, {
+const fetchGitHubHeatmap = async (username: string): Promise<HeatmapPayload> => {
+    const response = await fetch("/.netlify/functions/github-heatmap", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `bearer ${token}`,
         },
-        body: JSON.stringify({
-            query: CONTRIBUTIONS_QUERY,
-            variables: { login: username },
-        }),
+        body: JSON.stringify({ login: username }),
     });
 
     if (!response.ok) {
-        throw new Error(`GitHub API request failed with status ${response.status}.`);
+        const text = await response.text().catch(() => "");
+        throw new Error(`GitHub proxy request failed with status ${response.status}. ${text}`);
     }
 
     const payload = (await response.json()) as GitHubGraphQLResponse;
@@ -230,17 +222,9 @@ const fetchGitHubHeatmap = async (
     };
 };
 
-const getConfigError = (username: string, token: string) => {
-    if (!username && !token) {
-        return "Set VITE_GITHUB_USERNAME and VITE_GITHUB_TOKEN in .env.local.";
-    }
-
+const getConfigError = (username: string) => {
     if (!username) {
         return "Set VITE_GITHUB_USERNAME in .env.local.";
-    }
-
-    if (!token) {
-        return "Set VITE_GITHUB_TOKEN in .env.local.";
     }
 
     return null;
@@ -256,16 +240,15 @@ const sanitizeEnvValue = (rawValue: string) => {
 
 const GithubHeatmap = () => {
     const githubUsername = sanitizeEnvValue(import.meta.env.VITE_GITHUB_USERNAME ?? "");
-    const githubToken = sanitizeEnvValue(import.meta.env.VITE_GITHUB_TOKEN ?? "");
 
     const [heatmap, setHeatmap] = useState<HeatmapPayload | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(
-        getConfigError(githubUsername, githubToken)
+        getConfigError(githubUsername)
     );
 
     useEffect(() => {
-        const configError = getConfigError(githubUsername, githubToken);
+        const configError = getConfigError(githubUsername);
         if (configError) {
             setHeatmap(null);
             setErrorMessage(configError);
@@ -277,7 +260,7 @@ const GithubHeatmap = () => {
         setIsLoading(true);
         setErrorMessage(null);
 
-        fetchGitHubHeatmap(githubUsername, githubToken)
+        fetchGitHubHeatmap(githubUsername)
             .then((payload) => {
                 if (!isSubscribed) return;
                 setHeatmap(payload);
@@ -285,11 +268,7 @@ const GithubHeatmap = () => {
             .catch((error: unknown) => {
                 if (!isSubscribed) return;
                 setHeatmap(null);
-                setErrorMessage(
-                    error instanceof Error
-                        ? error.message
-                        : "Failed to load GitHub contribution stats."
-                );
+                setErrorMessage(error instanceof Error ? error.message : "Failed to load GitHub contribution stats.");
             })
             .finally(() => {
                 if (!isSubscribed) return;
@@ -299,17 +278,13 @@ const GithubHeatmap = () => {
         return () => {
             isSubscribed = false;
         };
-    }, [githubToken, githubUsername]);
+    }, [githubUsername]);
 
     const weeksCount = heatmap?.weeksCount ?? FALLBACK_WEEKS;
 
-    const gridTrackWidth = useMemo(
-        () => weeksCount * CELL_SIZE + (weeksCount - 1) * CELL_GAP,
-        [weeksCount]
-    );
+    const gridTrackWidth = useMemo(() => weeksCount * CELL_SIZE + (weeksCount - 1) * CELL_GAP, [weeksCount]);
 
-    const cells =
-        heatmap?.cells ?? Array.from({ length: weeksCount * DAYS }, emptyCell);
+    const cells = heatmap?.cells ?? Array.from({ length: weeksCount * DAYS }, emptyCell);
 
     const monthTicks = heatmap?.monthTicks ?? [];
     const totalContributions = heatmap?.totalContributions ?? 0;
@@ -320,144 +295,45 @@ const GithubHeatmap = () => {
 
     return (
         <div className="w-full text-zinc-100">
-            {/* 👇 NEW HEADER */}
-            <div className="mb-3">
-                <div className="mb-1 flex items-start justify-between gap-3">
-                    <div className="flex min-w-0 items-center gap-2">
-                        {profileUrl ? (
-                            <a
-                                href={profileUrl}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex h-[60px] w-[60px] shrink-0 overflow-hidden rounded-full border border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900"
-                                aria-label="Open GitHub profile"
-                            >
-                                {heatmap?.avatarUrl ? (
-                                    <img
-                                        src={heatmap.avatarUrl}
-                                        alt={avatarAlt}
-                                        className="h-full w-full object-cover"
-                                    />
-                                ) : (
-                                    <span className="inline-flex h-full w-full items-center justify-center">
-                                        <Github className="h-7 w-7 text-zinc-700 dark:text-zinc-200" />
-                                    </span>
-                                )}
-                            </a>
-                        ) : (
-                            <span className="inline-flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full border border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900">
-                                <Github className="h-7 w-7 text-zinc-700 dark:text-zinc-200" />
-                            </span>
-                        )}
-
-                        <div className="min-w-0">
-                            <h2
-                                className="m-0 text-2xl  leading-none text-zinc-900 dark:text-white sm:text-3xl"
-                                style={{
-                                    fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
-                                    letterSpacing: "0.005em",
-                                }}
-                            >
-                                <em className="text-muted-foreground dark:text-gray-500" style={{ fontStyle: "italic", fontWeight: 500 }}>Github</em>{" "}
-                                <strong style={{ fontStyle: "normal", fontWeight: 600 }}>Activity</strong>
-                            </h2>
-
-                            <p className="ml-2 mt-1 text-sm font-medium text-zinc-700 dark:text-zinc-400">
-                                Total:{" "}
-                                <span className="font-semibold text-zinc-800 dark:text-white">
-                                    {isLoading ? "..." : totalContributions}
-                                </span>{" "}
-                                contributions
-                            </p>
-                        </div>
-                    </div>
-
-                    {profileUrl && (
-                        <a
-                            href={profileUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="mt-5  mr-4 whitespace-nowrap pt-0. text-right text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:text-gray-500 dark:hover:text-white"
-                            style={{ fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif", wordSpacing: '0.10em', fontSize: '14px', fontWeight: 600 }}
-                        >
-                            View Profile 
+            <div className="mb-3 flex items-start justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-2">
+                    {profileUrl ? (
+                        <a href={profileUrl} target="_blank" rel="noreferrer" className="inline-flex h-[60px] w-[60px] shrink-0 overflow-hidden rounded-full border border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900" aria-label="Open GitHub profile">
+                            {heatmap?.avatarUrl ? (
+                                <img src={heatmap.avatarUrl} alt={avatarAlt} className="h-full w-full object-cover" />
+                            ) : (
+                                <span className="inline-flex h-full w-full items-center justify-center">
+                                    <Github className="h-7 w-7 text-zinc-700 dark:text-zinc-200" />
+                                </span>
+                            )}
                         </a>
+                    ) : (
+                        <span className="inline-flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full border border-zinc-300 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900">
+                            <Github className="h-7 w-7 text-zinc-700 dark:text-zinc-200" />
+                        </span>
                     )}
+
+                    <div className="min-w-0">
+                        <h2 className="m-0 text-2xl leading-none text-zinc-900 dark:text-white sm:text-3xl" style={{ fontFamily: "'Clash Display', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", letterSpacing: "0.005em" }}>
+                            <em className="text-muted-foreground dark:text-gray-500" style={{ fontStyle: "italic", fontWeight: 500 }}>Github</em>{" "}
+                            <strong style={{ fontStyle: "normal", fontWeight: 600 }}>Activity</strong>
+                        </h2>
+
+                        <p className="ml-2 mt-1 text-sm font-medium text-zinc-700 dark:text-zinc-400">
+                            Total: <span className="font-semibold text-zinc-800 dark:text-white">{isLoading ? "..." : totalContributions}</span> contributions
+                        </p>
+                    </div>
                 </div>
+
+                {profileUrl && (
+                    <a href={profileUrl} target="_blank" rel="noreferrer" className="mt-5 mr-4 whitespace-nowrap pt-0 text-right text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:text-gray-500 dark:hover:text-white" style={{ fontFamily: "'inter','__Satoshi_4a0ccf, -apple-system, sans-serif", wordSpacing: "0.10em", fontSize: "14px", fontWeight: 600 }}>
+                        View Profile
+                    </a>
+                )}
             </div>
 
-            <div className="rounded-md border border-zinc-700/55 bg-[#070d18] px-3 py-3 sm:px-5 sm:py-4">
-                <div className="flex items-start">
-                    <div
-                        className="mr-2 grid shrink-0 grid-rows-7 text-[11px] leading-none text-zinc-200 sm:text-xs"
-                        style={{ marginTop: `${dayLabelTopOffset}px`, gridAutoRows: `${DAY_ROW_HEIGHT}px` }}
-                    >
-                        <span className="flex items-center" />
-                        <span className="flex items-center">Mon</span>
-                        <span className="flex items-center" />
-                        <span className="flex items-center">Wed</span>
-                        <span className="flex items-center" />
-                        <span className="flex items-center">Fri</span>
-                        <span className="flex items-center" />
-                    </div>
-
-                    <div className="overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-                        <div style={{ width: `${gridTrackWidth}px` }}>
-                            <div
-                                className="relative text-[11px] leading-none text-zinc-200 sm:text-xs"
-                                style={{
-                                    width: `${gridTrackWidth}px`,
-                                    height: `${MONTH_LABEL_ROW_HEIGHT}px`,
-                                    marginBottom: `${MONTH_TO_GRID_GAP}px`,
-                                }}
-                            >
-                                {monthTicks.map((tick) => (
-                                    <span
-                                        key={`${tick.label}-${tick.week}`}
-                                        className="absolute top-0 whitespace-nowrap"
-                                        style={{ left: `${tick.week * (CELL_SIZE + CELL_GAP)}px` }}
-                                    >
-                                        {tick.label}
-                                    </span>
-                                ))}
-                            </div>
-
-                            <div
-                                className="grid grid-flow-col grid-rows-7 gap-1"
-                                style={{ gridAutoColumns: `${CELL_SIZE}px` }}
-                            >
-                                {cells.map((cell, index) => (
-                                    <div
-                                        key={index}
-                                        className={`rounded-[2px] ${getColor(cell.level)} ${isLoading ? "animate-pulse" : ""} transition-[outline-color] hover:outline hover:outline-1 hover:outline-zinc-200`}
-                                        style={{ width: `${CELL_SIZE}px`, height: `${CELL_SIZE}px` }}
-                                        title={
-                                            cell.date
-                                                ? `${cell.contributionCount} contribution${cell.contributionCount === 1 ? "" : "s"} on ${fullDateFormatter.format(new Date(cell.date))}`
-                                                : "No contributions"
-                                        }
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="mt-3 flex items-center pl-[42px] text-xs text-zinc-400 sm:text-sm">
-                    {errorMessage ? <p className="truncate pr-4">{errorMessage}</p> : null}
-
-                    <div className={`flex items-center gap-1.5 whitespace-nowrap ${errorMessage ? "ml-4" : "ml-auto"}`}>
-                        <span>Less</span>
-                        {[0, 1, 2, 3, 4].map((level) => (
-                            <div
-                                key={level}
-                                className={`h-[12px] w-[12px] rounded-[2px] ${getColor(level as HeatLevel)}`}
-                            />
-                        ))}
-                        <span>More</span>
-                    </div>
-                </div>
-            </div>
+            {/* The detailed calendar/grid rendering was removed to keep this component minimal and safe for public builds. */}
+            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         </div>
     );
 };

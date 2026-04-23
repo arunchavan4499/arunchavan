@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+# Optional: set a base directory if your repo root isn't the site root
+# [build.environment]
+#   NODE_VERSION = "16"
